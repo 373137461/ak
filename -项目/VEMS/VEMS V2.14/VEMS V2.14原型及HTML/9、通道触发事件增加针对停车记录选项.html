@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>9、通道触发事件增加针对停车记录选项</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/9、通道触发事件增加针对停车记录选项/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/9、通道触发事件增加针对停车记录选项/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1598" class="ax_default box_1">
+        <div id="u1598_div" class=""></div>
+        <div id="u1598_text" class="text ">
+          <p><span style="font-family:'等线 Bold', '等线 Regular', '等线';font-weight:700;">需求背景：</span></p><p><span style="font-family:'等线';font-weight:400;">校园内禁止穿行，例如检测到车辆从A口入B口出（算作穿行时，将使用通道触发事件计算系数）</span></p><p><span style="font-family:'等线';font-weight:400;">当车辆从A口进入，发放自动券，A口出去时（不触发自动券），该停车场有规则同门进出30分钟内不收费，此时车辆从B口进入，再从B口出去时，B口驶出距离A口进入时不超过30分钟，但是此时将触发A口进入时发放的自动券，将导致车辆不能享受从B口同门进出30分钟内免费的优惠。</span></p><p><span style="font-family:'等线';font-weight:400;"><br></span></p><p><span style="font-family:'等线 Bold', '等线 Regular', '等线';font-weight:700;">业务说明：</span></p><p><span style="font-family:'等线';font-weight:400;">1、在停车场管理-通道配置-管理模式定义中，增加发券限制选择：优惠券发放至车牌/卡票号或停车记录</span></p><p><span style="font-family:'等线';font-weight:400;">2、优惠券发放至 默认选择车牌/卡票号；</span></p><p><span style="font-family:'等线';font-weight:400;">3、当优惠券选择发放至停车记录时，该优惠券整次停车有效。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u1599" class="ax_default image">
+        <img id="u1599_img" class="img " src="images/9、通道触发事件增加针对停车记录选项/u1599.png"/>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u1600" class="ax_default droplist">
+        <select id="u1600_input">
+          <option selected value="车牌/卡票号">车牌/卡票号</option>
+          <option value="停车记录">停车记录</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1601" class="ax_default label">
+        <div id="u1601_div" class=""></div>
+        <div id="u1601_text" class="text ">
+          <p><span>优惠券发放至：</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1602" class="ax_default box_1">
+        <div id="u1602_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (组合) -->
+      <div id="u1603" class="ax_default" data-left="320" data-top="739" data-width="387" data-height="106">
+
+        <!-- Unnamed (矩形) -->
+        <div id="u1604" class="ax_default box_1">
+          <div id="u1604_div" class=""></div>
+        </div>
+
+        <!-- Unnamed (组合) -->
+        <div id="u1605" class="ax_default" data-left="365" data-top="760" data-width="297" data-height="67">
+
+          <!-- Unnamed (下拉列表框) -->
+          <div id="u1606" class="ax_default droplist">
+            <select id="u1606_input">
+              <option selected value="车牌/卡票号">车牌/卡票号</option>
+              <option value="停车记录">停车记录</option>
+            </select>
+          </div>
+
+          <!-- Unnamed (矩形) -->
+          <div id="u1607" class="ax_default label">
+            <div id="u1607_div" class=""></div>
+            <div id="u1607_text" class="text ">
+              <p><span>优惠券发放至：</span></p>
+            </div>
+          </div>
+
+          <!-- Unnamed (矩形) -->
+          <div id="u1608" class="ax_default box_1">
+            <div id="u1608_div" class=""></div>
+            <div id="u1608_text" class="text ">
+              <p><span>车牌/卡票号</span></p>
+            </div>
+          </div>
+
+          <!-- Unnamed (矩形) -->
+          <div id="u1609" class="ax_default box_1">
+            <div id="u1609_div" class=""></div>
+            <div id="u1609_text" class="text ">
+              <p><span>停车记录</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u1610" class="ax_default _连接线">
+        <img id="u1610_seg0" class="img " src="images/9、通道触发事件增加针对停车记录选项/u1610_seg0.png" alt="u1610_seg0"/>
+        <img id="u1610_seg1" class="img " src="images/9、通道触发事件增加针对停车记录选项/u1610_seg1.png" alt="u1610_seg1"/>
+        <img id="u1610_seg2" class="img " src="images/8_1增加vip满位放行模式选择/u1550_seg2.png" alt="u1610_seg2"/>
+        <div id="u1610_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

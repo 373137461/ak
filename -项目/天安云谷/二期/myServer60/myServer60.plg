@@ -1,0 +1,27 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: myServer60 - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\OPCCLI~1\LOCALS~1\Temp\RSP2C6.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Release/" /Fp"Release/myServer60.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"E:\新建文件夹\NTS OPC\NTS-9000 V1.1\trunk\5.Coding\src\Opc\myServer60\myServer60Dlg.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\OPCCLI~1\LOCALS~1\Temp\RSP2C6.tmp" 
+Creating command line "link.exe OPCServer.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/myServer60.pdb" /machine:I386 /out:"Release/myServer60.exe"  ".\Release\myServer60.obj" ".\Release\myServer60Dlg.obj" ".\Release\StdAfx.obj" ".\Release\myServer60.res" "
+<h3>Output Window</h3>
+Compiling...
+myServer60Dlg.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+myServer60.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

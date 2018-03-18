@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>对账问题</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/对账问题/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/对账问题/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u0" class="ax_default box_2">
+        <div id="u0_div" class=""></div>
+        <div id="u0_text" class="text ">
+          <p><span style="font-family:'黑体 Bold', '黑体';font-weight:700;">当前问题：</span></p><p><span style="font-family:'黑体';font-weight:400;">1、总实收一致，但VEMS上报的平台实收金额与搜索流水结果不一致，部分线下实收金额统计到线上；</span></p><p><span style="font-family:'黑体';font-weight:400;">2、VEMS未区分第三方平台实收金额；</span></p><p><span style="font-family:'黑体';font-weight:400;">3、线下上报给线上，如：第三方余额支付的，需要线上通过上报缴费账单接口返回支付流水号给停车场，否则线上线下的流水没有对应唯一流水号去比对。</span></p><p><span style="font-family:'黑体';font-weight:400;">4、线下统计报表中部分线上支付的统计到线下支付了，主要是自助缴费机-微信支付部分。</span></p><p><span style="font-family:'黑体';font-weight:400;"><br></span></p><p><span style="font-family:'黑体 Bold', '黑体';font-weight:700;">方案业务说明：</span></p><p><span style="font-family:'黑体';font-weight:400;">（1）增加数据同步机制，同步不成功的记录可通过【重新生成】功能重新同步。线上的记录重新下发给线下，线下的记录重新上报给线上。VEMS向线上报已收到的同步数据，线上匹配同步情况，在流水中标记差异情况。技术实现的策略由海爷和汪健确定。</span></p><p><span style="font-family:'黑体';font-weight:400;">（2）添加停车场收费账单的支付来源备注和支付方式备注。</span></p><p><span style="font-family:'黑体';font-weight:400;">（3）VEMS按资金流向统计 总实收金额、线下总实收金额、第三方平台实收金额、平台实收金额上报给线上。自身不做界面。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (表格) -->
+      <div id="u1" class="ax_default">
+
+        <!-- Unnamed (单元格) -->
+        <div id="u2" class="ax_default table_cell">
+          <img id="u2_img" class="img " src="images/对账问题/u2.png"/>
+          <div id="u2_text" class="text ">
+            <p><span>字段名称</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u3" class="ax_default table_cell">
+          <img id="u3_img" class="img " src="images/对账问题/u3.png"/>
+          <div id="u3_text" class="text ">
+            <p><span>释义</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u4" class="ax_default table_cell">
+          <img id="u4_img" class="img " src="images/对账问题/u4.png"/>
+          <div id="u4_text" class="text ">
+            <p><span>总实收金额</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u5" class="ax_default table_cell">
+          <img id="u5_img" class="img " src="images/对账问题/u5.png"/>
+          <div id="u5_text" class="text ">
+            <p><span>临停收费的实收金额总额</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u6" class="ax_default table_cell">
+          <img id="u6_img" class="img " src="images/对账问题/u4.png"/>
+          <div id="u6_text" class="text ">
+            <p><span>线下总实收金额</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u7" class="ax_default table_cell">
+          <img id="u7_img" class="img " src="images/对账问题/u5.png"/>
+          <div id="u7_text" class="text ">
+            <p><span>线下实收现金总额</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u8" class="ax_default table_cell">
+          <img id="u8_img" class="img " src="images/对账问题/u8.png"/>
+          <div id="u8_text" class="text ">
+            <p><span>第三方平台实收金额</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u9" class="ax_default table_cell">
+          <img id="u9_img" class="img " src="images/对账问题/u9.png"/>
+          <div id="u9_text" class="text ">
+            <p><span>第三方平台对接后，直接由第三方平台收取的金额总额，不流经公司相关账户。如：岭南站。</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u10" class="ax_default table_cell">
+          <img id="u10_img" class="img " src="images/对账问题/u10.png"/>
+          <div id="u10_text" class="text ">
+            <p><span>平台实收金额</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u11" class="ax_default table_cell">
+          <img id="u11_img" class="img " src="images/对账问题/u11.png"/>
+          <div id="u11_text" class="text ">
+            <p><span>平台线上收取，流经公司相关账户的实收金额总额</span></p><p><span>包括：停车场直接到账和非直接到账。</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

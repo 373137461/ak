@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>6、出场触发地感即锁定出场时间下的查费结果</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/6、出场触发地感即锁定出场时间下的查费结果/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/6、出场触发地感即锁定出场时间下的查费结果/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1533" class="ax_default box_1">
+        <div id="u1533_div" class=""></div>
+        <div id="u1533_text" class="text ">
+          <p><span style="font-family:'等线 Bold', '等线 Regular', '等线';font-weight:700;">需求场景：</span></p><p><span style="font-family:'等线';font-weight:400;">车主出场触发摄像枪抓拍，一体机显示及播报停车费用3元，此时，车主不能现金支付，通过微信扫描二维码查费，此时已进入另一段计费时间，查费显示6元。</span></p><p><span style="font-family:'等线';font-weight:400;">因为时间差，一体机显示播报金额与微信查费金额不一致，造成用户体验差。</span></p><p><span style="font-family:'等线 Bold', '等线 Regular', '等线';font-weight:700;"><br></span></p><p><span style="font-family:'等线 Bold', '等线 Regular', '等线';font-weight:700;">业务说明：</span></p><p><span style="font-family:'等线';font-weight:400;">1、车主出场时触发摄像枪抓拍，一体机将用户车牌号和触发抓拍时间返回VEMS，保留用户的预离场记录；</span></p><p><span style="font-family:'等线';font-weight:400;">2、用户扫描二维码，VEMS接收用户查费请求，先判定是否存有该车牌的预离场记录，如果没有预离场记录，将按实际查费时间计算停车费用，并将查费结果返回给用户；</span></p><p><span style="font-family:'等线';font-weight:400;">3、若该车牌与预离场记录相匹配时，将预离场时间作为用户的查费时间来计费停车费用，并将查费结果返回给用户，确保一体机显示及播报金额与一点停车费结果相一致。</span></p><p><span style="font-family:'等线';font-weight:400;"><br></span></p><p><span style="font-family:'等线 Bold', '等线 Regular', '等线';font-weight:700;">约束条件：</span></p><p><span style="font-family:'等线';font-weight:400;">1、当车辆出场后（一体机开闸）自动清除用户触发摄像枪抓拍的预离场记录；</span></p><p><span style="font-family:'等线';font-weight:400;">2、用户触发摄像枪抓拍的预离场记录锁定查费时间及费用5分钟内有效，超过5分钟预离场记录失效，。如：用户触发摄像枪抓拍时间为10:59，用户查费时间为11:00，那么将10:59作为用户查费时间计算停车费用；用户查费时间为11:06，此时直接按11:06作为用户查费时间计算停车费用。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u1534" class="ax_default image">
+        <img id="u1534_img" class="img " src="images/6、出场触发地感即锁定出场时间下的查费结果/u1534.png"/>
+      </div>
+    </div>
+  </body>
+</html>
