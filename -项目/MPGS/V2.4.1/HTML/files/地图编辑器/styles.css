@@ -27,7 +27,6 @@
   -webkit-box-shadow:none;
   box-shadow:none;
   font-family:'黑体';
-  font-weight:400;
   font-style:normal;
   font-size:16px;
   text-align:left;
@@ -41,7 +40,6 @@
   width:903px;
   height:210px;
   font-family:'黑体';
-  font-weight:400;
   font-style:normal;
   font-size:16px;
   text-align:left;
@@ -354,7 +352,7 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:94px;
+  width:153px;
   height:91px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
@@ -370,9 +368,9 @@
 #u30 {
   border-width:0px;
   position:absolute;
-  left:443px;
+  left:450px;
   top:985px;
-  width:94px;
+  width:153px;
   height:91px;
 }
 #u30_text {
@@ -423,7 +421,7 @@
   -moz-box-shadow:none;
   -webkit-box-shadow:none;
   box-shadow:none;
-  font-family:'黑体 Bold', '黑体';
+  font-family:'黑体 Bold', '黑体 Regular', '黑体';
   font-weight:700;
   font-style:normal;
   font-size:14px;
@@ -436,7 +434,7 @@
   top:1400px;
   width:278px;
   height:56px;
-  font-family:'黑体 Bold', '黑体';
+  font-family:'黑体 Bold', '黑体 Regular', '黑体';
   font-weight:700;
   font-style:normal;
   font-size:14px;
@@ -449,4 +447,70 @@
   top:20px;
   width:274px;
   word-wrap:break-word;
+}
+#u33_img {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:52px;
+  height:55px;
+}
+#u33 {
+  border-width:0px;
+  position:absolute;
+  left:536px;
+  top:995px;
+  width:52px;
+  height:55px;
+}
+#u33_text {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:0px;
+  visibility:hidden;
+  word-wrap:break-word;
+}
+#u34_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:81px;
+  height:15px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'黑体';
+  font-weight:400;
+  font-style:normal;
+  font-size:13px;
+  text-align:center;
+}
+#u34 {
+  border-width:0px;
+  position:absolute;
+  left:522px;
+  top:1053px;
+  width:81px;
+  height:15px;
+  font-family:'黑体';
+  font-weight:400;
+  font-style:normal;
+  font-size:13px;
+  text-align:center;
+}
+#u34_text {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:81px;
+  white-space:nowrap;
 }

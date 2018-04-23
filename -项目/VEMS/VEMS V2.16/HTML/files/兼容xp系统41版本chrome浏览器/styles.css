@@ -1,0 +1,255 @@
+﻿body {
+  margin:0px;
+  background-image:none;
+  position:static;
+  left:auto;
+  width:794px;
+  margin-left:0;
+  margin-right:0;
+  text-align:left;
+}
+#base {
+  position:absolute;
+  z-index:0;
+}
+#u0_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:794px;
+  height:254px;
+  background:inherit;
+  background-color:rgba(242, 242, 242, 1);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'黑体 Bold', '黑体 Regular', '黑体';
+  font-style:normal;
+  font-size:15px;
+  text-align:left;
+}
+#u0 {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:794px;
+  height:254px;
+  font-family:'黑体 Bold', '黑体 Regular', '黑体';
+  font-style:normal;
+  font-size:15px;
+  text-align:left;
+}
+#u0_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:11px;
+  width:790px;
+  word-wrap:break-word;
+}
+#u1 {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:0px;
+  height:0px;
+}
+#u2_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:484px;
+  height:276px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 1);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(121, 121, 121, 1);
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'等线 Bold', '等线';
+  font-weight:700;
+  font-style:normal;
+  font-size:16px;
+}
+#u2 {
+  border-width:0px;
+  position:absolute;
+  left:16px;
+  top:276px;
+  width:484px;
+  height:276px;
+  font-family:'等线 Bold', '等线';
+  font-weight:700;
+  font-style:normal;
+  font-size:16px;
+}
+#u2_text {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:0px;
+  visibility:hidden;
+  word-wrap:break-word;
+}
+#u3_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:484px;
+  height:33px;
+  background:inherit;
+  background-color:rgba(204, 204, 204, 1);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(121, 121, 121, 1);
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'等线 Bold', '等线';
+  font-weight:700;
+  font-style:normal;
+  font-size:14px;
+  text-align:left;
+}
+#u3 {
+  border-width:0px;
+  position:absolute;
+  left:16px;
+  top:276px;
+  width:484px;
+  height:33px;
+  font-family:'等线 Bold', '等线';
+  font-weight:700;
+  font-style:normal;
+  font-size:14px;
+  text-align:left;
+}
+#u3_text {
+  border-width:0px;
+  position:absolute;
+  left:2px;
+  top:9px;
+  width:480px;
+  word-wrap:break-word;
+}
+#u4_img {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:44px;
+  height:44px;
+}
+#u4 {
+  border-width:0px;
+  position:absolute;
+  left:236px;
+  top:326px;
+  width:44px;
+  height:44px;
+}
+#u4_text {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:0px;
+  visibility:hidden;
+  word-wrap:break-word;
+}
+#u5_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:417px;
+  height:26px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'黑体';
+  font-weight:400;
+  font-style:normal;
+  font-size:13px;
+  text-align:center;
+  line-height:28px;
+}
+#u5 {
+  border-width:0px;
+  position:absolute;
+  left:50px;
+  top:381px;
+  width:417px;
+  height:26px;
+  font-family:'黑体';
+  font-weight:400;
+  font-style:normal;
+  font-size:13px;
+  text-align:center;
+  line-height:28px;
+}
+#u5_text {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:-1px;
+  width:417px;
+  word-wrap:break-word;
+}
+#u6_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:289px;
+  height:125px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'黑体 Bold', '黑体 Regular', '黑体';
+  font-style:normal;
+  font-size:12px;
+  line-height:28px;
+}
+#u6 {
+  border-width:0px;
+  position:absolute;
+  left:114px;
+  top:408px;
+  width:289px;
+  height:125px;
+  font-family:'黑体 Bold', '黑体 Regular', '黑体';
+  font-style:normal;
+  font-size:12px;
+  line-height:28px;
+}
+#u6_text {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:6px;
+  width:289px;
+  word-wrap:break-word;
+}
