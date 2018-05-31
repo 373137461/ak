@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>车牌的模糊匹配功能</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/车牌的模糊匹配功能/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/车牌的模糊匹配功能/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u21" class="ax_default box_2">
+        <div id="u21_div" class=""></div>
+        <div id="u21_text" class="text ">
+          <p><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;">模糊匹配功能流程说明：</span></p><p><span style="font-family:'黑体';font-weight:400;">1、当车辆出场触发抓拍未匹配到进场记录时，将在“在场车辆”中自动搜寻与该车牌相差一位的进场记录，如果刚好匹配到一辆相差一位的车辆，则自动匹配，车牌号码取置信度高的记录。如果匹配到超过两辆及两辆以上的车辆，则系统不进行干干预处理，直接进入到原来未匹配的流程。</span></p><p><span style="font-family:'黑体';font-weight:400;">2、</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">车牌号码相差一位</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">：从左到右逐个比对，只存在一位误差</span><span style="font-family:'黑体';font-weight:400;">，如桂A12345和桂A12346。</span></p><p><span style="font-family:'黑体';font-weight:400;">3、出场未匹配进场记录时，提示未匹配，按原来的算法规则列出与识别车牌号码三位及以上相同的进场记录，由收费员手动匹配或校正。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u22" class="ax_default image">
+        <img id="u22_img" class="img " src="images/车牌的模糊匹配功能/u22.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u23" class="ax_default box_2">
+        <div id="u23_div" class=""></div>
+        <div id="u23_text" class="text ">
+          <p style="line-height:24px;"><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;">业务说明：</span></p><p style="line-height:24px;"><span style="font-family:'黑体';font-weight:400;">1、在停车场管理-车场配置模块中，将原来的“是否开启模糊车牌匹配”配置项改为“是否开启模糊匹配”，下拉框选项内容包括“系统自动匹配自动放行、系统自动匹配人工干预、关闭模糊匹配”三个选项，默认显示“关闭模糊匹配”</span></p><p style="line-height:24px;"><span style="font-family:'黑体';font-weight:400;">2、在“是否开启模糊匹配”增加？按钮，点击？弹出弹窗，弹窗释意内容为：</span></p><p style="line-height:24px;"><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;">模糊匹配</span><span style="font-family:'黑体';font-weight:400;">：车辆出场未匹配进场记录时，一体机将判断出场车牌是否为已添加的模糊匹配车牌，若是则执行模糊车牌匹配流程，若否将向管理端查询与出场车牌相差一位的进场记录。</span></p><p style="line-height:22px;"><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;">系统自动匹配自动放行</span><span style="font-family:'黑体';font-weight:400;">：能且只能找到一条符合条件的进场记录时，将按置信度高低自动匹配自动放行；</span></p><p style="line-height:22px;"><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;">系统自动匹配人工干预</span><span style="font-family:'黑体';font-weight:400;">：能且只能找到一条符合条件的进场记录后，若匹配车牌身份一致则自动匹配自动放行；若匹配车牌身份不一致则维持未匹配记录。</span></p><p style="line-height:24px;"><span style="font-family:'黑体';font-weight:400;">3、一体机执行自动匹配操作后需向管理端上报一条校正流水，校正类型为“模糊匹配”，在进出场管理-校正流水模块中，将原来的校正类型下拉框选项加上“模糊匹配”类型，操作员记为“system”。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u24" class="ax_default box_1">
+        <div id="u24_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u25" class="ax_default box_1">
+        <div id="u25_div" class=""></div>
+        <div id="u25_text" class="text ">
+          <p><span>校正类型</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u26" class="ax_default droplist">
+        <select id="u26_input">
+          <option value="全部">全部</option>
+          <option value="手动校正">手动校正</option>
+          <option value="手动匹配">手动匹配</option>
+          <option value="模糊匹配">模糊匹配</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u27" class="ax_default box_1">
+        <div id="u27_div" class=""></div>
+        <div id="u27_text" class="text ">
+          <p><span>手动校正</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u28" class="ax_default box_1">
+        <div id="u28_div" class=""></div>
+        <div id="u28_text" class="text ">
+          <p><span>手动匹配</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u29" class="ax_default box_1">
+        <div id="u29_div" class=""></div>
+        <div id="u29_text" class="text ">
+          <p><span>模糊匹配</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u30" class="ax_default box_1">
+        <div id="u30_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u31" class="ax_default _连接线">
+        <img id="u31_seg0" class="img " src="images/车牌的模糊匹配功能/u31_seg0.png" alt="u31_seg0"/>
+        <img id="u31_seg1" class="img " src="images/车牌的模糊匹配功能/u31_seg1.png" alt="u31_seg1"/>
+        <div id="u31_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u32" class="ax_default image">
+        <img id="u32_img" class="img " src="images/车牌的模糊匹配功能/u32.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u33" class="ax_default box_1">
+        <div id="u33_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u34" class="ax_default box_1">
+        <div id="u34_div" class=""></div>
+        <div id="u34_text" class="text ">
+          <p><span>是否开启模糊匹配：</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u35" class="ax_default droplist">
+        <select id="u35_input">
+          <option selected value="关闭模糊匹配">关闭模糊匹配</option>
+          <option value="模糊车牌匹配">模糊车牌匹配</option>
+          <option value="系统自动匹配自动放行">系统自动匹配自动放行</option>
+          <option value="系统自动匹配人工干预">系统自动匹配人工干预</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u36" class="ax_default box_1">
+        <div id="u36_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u37" class="ax_default box_1">
+        <div id="u37_div" class=""></div>
+        <div id="u37_text" class="text ">
+          <p><span>关闭模糊匹配</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u38" class="ax_default box_1">
+        <div id="u38_div" class=""></div>
+        <div id="u38_text" class="text ">
+          <p><span>系统自动匹配自动放行</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u39" class="ax_default box_1">
+        <div id="u39_div" class=""></div>
+        <div id="u39_text" class="text ">
+          <p><span>系统自动匹配人工干预</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u40" class="ax_default _连接线">
+        <img id="u40_seg0" class="img " src="images/车牌的模糊匹配功能/u40_seg0.png" alt="u40_seg0"/>
+        <img id="u40_seg1" class="img " src="images/车牌的模糊匹配功能/u40_seg1.png" alt="u40_seg1"/>
+        <div id="u40_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u41" class="ax_default image">
+        <img id="u41_img" class="img " src="images/车牌的模糊匹配功能/u41.png"/>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u42" class="ax_default icon">
+        <img id="u42_img" class="img " src="images/车牌的模糊匹配功能/u42.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u43" class="ax_default box_1">
+        <div id="u43_div" class=""></div>
+        <div id="u43_text" class="text ">
+          <p><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;">模糊匹配</span><span style="font-family:'黑体';font-weight:400;">：车辆出场未匹配进场记录时，一体机将判断出场车牌是否为已添加的模糊匹配车牌，若是则执行模糊车牌匹配流程，若否将向管理端查询与出场车牌相差一位的进场记录。</span></p><p><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;">系统自动匹配自动放行</span><span style="font-family:'黑体';font-weight:400;">：能且只能找到一条符合条件的进场记录时，将按置信度高低自动匹配自动放行；</span></p><p><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;">系统自动匹配人工干预</span><span style="font-family:'黑体';font-weight:400;">：能且只能找到一条符合条件的进场记录后，若匹配车牌身份一致则自动匹配自动放行；若匹配车牌身份不一致则维持未匹配记录。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u44" class="ax_default icon">
+        <img id="u44_img" class="img " src="images/车辆锁车后收费员页面需要增加提示且不可放行/u18.png"/>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u45" class="ax_default _连接线">
+        <img id="u45_seg0" class="img " src="images/车牌的模糊匹配功能/u45_seg0.png" alt="u45_seg0"/>
+        <img id="u45_seg1" class="img " src="images/车牌的模糊匹配功能/u45_seg1.png" alt="u45_seg1"/>
+        <img id="u45_seg2" class="img " src="images/车牌的模糊匹配功能/u45_seg2.png" alt="u45_seg2"/>
+        <img id="u45_seg3" class="img " src="images/车牌的模糊匹配功能/u45_seg3.png" alt="u45_seg3"/>
+        <div id="u45_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
