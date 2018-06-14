@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>地图编辑器的数据结构调整优化</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/地图编辑器的数据结构调整优化/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/地图编辑器的数据结构调整优化/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1" class="ax_default box_2">
+        <div id="u1_div" class=""></div>
+        <div id="u1_text" class="text ">
+          <p><span style="font-family:'黑体';font-weight:400;">业务说明：</span></p><p><span style="font-family:'黑体';font-weight:400;">1、地图数据分开实体数据和关系数据，调整数据结构。</span></p><p><span style="font-family:'黑体';font-weight:400;">2、地图中每个元素生成一个唯一ID，相同类型元素生成的id不能重复；后台提供一个检查设备id和车位编号的接口，前端调用检查。</span></p><p><span style="font-family:'黑体';font-weight:400;">3、用户每新增一个元素都检查一次该元素生成的设备ID是否与相同类型已有元素的设备ID重复，如果重复将提示用户“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">实体编号重复</span><span style="font-family:'黑体';font-weight:400;">”。</span></p><p><span style="font-family:'黑体';font-weight:400;">4、前端最后保存上传的时候，需检查设备ID是否唯一，检查到存在重复的设备ID将无法保存并提示“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">xx层xxx区域编号xxxx不是唯一实体，请检查！</span><span style="font-family:'黑体';font-weight:400;">”（两个同类型元素设备ID重复情况下，提示最后添加的元素编号）</span></p><p><span style="font-family:'黑体';font-weight:400;">5、前端最后保存上传的时候，需检查是否有孤立的路径点，存在孤立的路径点不可保存。当存在孤立的路径点是</span><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;color:#FF0000;">高亮该路径点</span><span style="font-family:'黑体';font-weight:400;">并提示“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">存在无关联的路径点，请检查！”</span></p><p><span style="font-family:'黑体';font-weight:400;">6、前端最后保存上传的时候，需检查有关联关系的关联实体是否存在，关联关系必须存在关联实体，关联实体被删除后需同步删除该实体的关联关系。如果检查到关联关系存在但无实体时应提示“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">找不到绑定xxx</span><span style="font-family:'黑体';font-weight:400;color:#A1A1A1;">（元素名称）</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">xxx</span><span style="font-family:'黑体';font-weight:400;color:#A1A1A1;">（元素编号）</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">的xxx</span><span style="font-family:'黑体';font-weight:400;color:#A1A1A1;">（元素名称/区域名称）</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">xxx</span><span style="font-family:'黑体';font-weight:400;color:#A1A1A1;">（元素编号）</span><span style="font-family:'黑体';font-weight:400;">”，比如引导屏PING11绑定AA区域后，删除AA区域，用户上传数据时检查到屏与1区域的关系且找不到1区域，那么无法保存且提示“找不到绑定引导屏PING11的区域AA”</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u2" class="ax_default _图片">
+        <img id="u2_img" class="img " src="images/地图编辑器的数据结构调整优化/u2.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3" class="ax_default box_1">
+        <div id="u3_div" class=""></div>
+        <div id="u3_text" class="text ">
+          <p><span>存在无关联的路径点，请检查！</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u4" class="ax_default _图片">
+        <img id="u4_img" class="img " src="images/地图编辑器的数据结构调整优化/u2.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5" class="ax_default box_1">
+        <div id="u5_div" class=""></div>
+        <div id="u5_text" class="text ">
+          <p><span>B1层Y区域编号158-SPGLQ3不是唯一实体，请检查！</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u6" class="ax_default _图片">
+        <img id="u6_img" class="img " src="images/地图编辑器的数据结构调整优化/u2.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u7" class="ax_default box_1">
+        <div id="u7_div" class=""></div>
+        <div id="u7_text" class="text ">
+          <p><span>找不到绑定引导屏PING11的区域AA!</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
