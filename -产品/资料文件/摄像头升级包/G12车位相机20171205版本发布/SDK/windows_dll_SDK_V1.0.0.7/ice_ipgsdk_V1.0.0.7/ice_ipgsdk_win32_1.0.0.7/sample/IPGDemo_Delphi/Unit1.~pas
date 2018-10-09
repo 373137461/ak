@@ -1,0 +1,1040 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ipgsdk, ExtCtrls, StdCtrls, Menus, ComCtrls, UartSet, UintSystemCfg,
+  UnitIPSearch, UnitLightCtrl;
+
+const
+  MAX_CONNECT_NUM= 4;
+  WM_MYMESSAGE=WM_USER+5;
+  WM_PORTMSG=WM_USER+6;
+  WM_DEVMSG=WM_USER+7;
+
+type
+
+  PPortMsgRec = ^TPortMsgRec;
+  TPortMsgRec = record
+    ip: array[0..32] of Char;
+    dataType: Integer;
+    data: array[0..1023] of Char;
+    len: Integer;
+  end;
+
+  PMsgRec = ^TMsgRec;
+  TMsgRec = record
+    ip: array[0..32] of Char;
+    pic: array[0..1048575] of Char;
+    len: Integer;
+    stParkingResult: ICE_PARKING_SPACE_RESULT_S;
+  end;
+
+  PDevMsgRec = ^TDevMsgRec;
+  TDevMsgRec = record
+    ip: array[0..32] of Char;
+    u32EventType: ICE_U32;
+    u32EventData: array[0..3] of ICE_U32;
+  end;
+
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    EditIP: TEdit;
+    Button_Login: TButton;
+    GroupBox1: TGroupBox;
+    Button_Logout: TButton;
+    Button_Single: TButton;
+    ComboBox_SpaceNum: TComboBox;
+    Button_System: TButton;
+    Button_All: TButton;
+    Button_Uart: TButton;
+    Button_RS232: TButton;
+    Button_Algo: TButton;
+    ListBoxInfo: TListBox;
+    ListView_IP: TListView;
+    ListView_SpaceInfo: TListView;
+    CheckBox_SaveLog_232: TCheckBox;
+    Button_RS485: TButton;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    Button_lightCtrl: TButton;
+    Button_getDevTime: TButton;
+    Button_syncTime: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button_LoginClick(Sender: TObject);
+    procedure Button_LogoutClick(Sender: TObject);
+    procedure ListView_IPClick(Sender: TObject);
+    procedure ListView_IPMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure Button_UartClick(Sender: TObject);
+    procedure Button_RS232Click(Sender: TObject);
+    procedure Button_SystemClick(Sender: TObject);
+    procedure Button_AlgoClick(Sender: TObject);
+    procedure Button_SingleClick(Sender: TObject);
+    procedure Button_AllClick(Sender: TObject);
+    procedure Button_RS485Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure Button_lightCtrlClick(Sender: TObject);
+    procedure Button_syncTimeClick(Sender: TObject);
+    procedure Button_getDevTimeClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    Procedure WMUser(var msg:TMessage);Message WM_MYMESSAGE;
+     Procedure WMPortMsg(var msg:TMessage);Message WM_PORTMSG;
+     Procedure WMDevMsg(var msg:TMessage);Message WM_DEVMSG;
+     Function getSpaceStatus(nSpaceStatus: Integer):string;
+     procedure savePic(pcPicData: PChar; u32PicLen: UINT; pcIP: PChar);
+  end;
+
+var
+  Form1: TForm1;
+  hSDK  : array[0..(MAX_CONNECT_NUM- 1)] of Pointer=(nil,nil,nil,nil);
+  strPlateColor: array[0..6] of String=('未知', '蓝色', '黄色', '白色', '黑色', '绿色', '绿色');
+  strCarType: array[0..2] of String=('临时', '预定', '固定');
+  strEventType: array[0..2] of String=('无变化', '入车', '出车');
+  strSpaceTitle: array[0..8] of String=('序号', '相机ip', '时间', '车位ID', '车位状态', '车牌号码',
+                                        '车牌颜色', '车位类型', '事件类型');
+  count_rs485: array[0..3] of UINT = (0,0,0,0);
+  count_rs232: array[0..3] of UINT = (0,0,0,0);
+  strStorePath: String;
+  portMsgRec: array[0..3] of TPortMsgRec;
+  msgRec: array[0..3] of TMsgRec;
+  nTotalNum: UINT;
+  nTotalSpaceNum: array[0..3] of UINT;
+implementation
+
+uses UnitAlgoCfg, UnitTrans;
+
+{$R *.dfm}
+
+procedure OnDeviceEvent(pvParam: Pointer; pcIP: PChar;
+  u32EventType: ICE_U32; u32EventData1: ICE_U32; u32EventData2: ICE_U32;
+  u32EventData3: ICE_U32; u32EventData4: ICE_U32);stdcall;
+var
+  devMsgRec: PDevMsgRec;
+begin
+//注意：回调的代码是运行在dll里的，只要在dll和exe之间传递string类型或者动态数组，就会有问题，
+  //postMessage以后，消息响应就运行在exe里了
+  New(devMsgRec);
+  CopyMemory(@devMsgRec.ip[0], pcIP, StrLen(pcIP) + 1);
+  devMsgRec.u32EventType := u32EventType;
+  devMsgRec.u32EventData[0] := u32EventData1;
+  devMsgRec.u32EventData[1] := u32EventData2;
+  devMsgRec.u32EventData[2] := u32EventData3;
+  devMsgRec.u32EventData[3] := u32EventData4;
+  PostMessage(Form1.Handle, WM_DEVMSG, 0, Integer(devMsgRec));
+end;
+
+//显示接收到的串口数据个数在界面上
+procedure TForm1.WMDevMsg(var msg:TMessage);
+var
+  devMsgRec: PDevMsgRec;
+  strText: String;
+begin
+  devMsgRec := Pointer(msg.LParam);
+  
+  if (devMsgRec.u32EventType = 0) then
+  begin
+    strText := strPas(devMsgRec.ip) + ' : 当前状态离线';
+  end
+  else if (devMsgRec.u32EventType = 1) then
+  begin
+    strText := strPas(devMsgRec.ip) + ' : 当前状态在线';
+  end
+  else if (devMsgRec.u32EventType = 2) then
+  begin
+    strText := strPas(devMsgRec.ip) + ' IO状态改变 : ' + IntToStr(devMsgRec.u32EventData[0]) +
+      IntToStr(devMsgRec.u32EventData[1]) + IntToStr(devMsgRec.u32EventData[2]) +
+      IntToStr(devMsgRec.u32EventData[3]);
+  end;
+
+  Dispose(devMsgRec);
+
+  if listBoxInfo.Items.Count > 500 then
+    listBoxInfo.Items.Clear;
+  listBoxInfo.Items.Insert(0, strText);
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+var
+  i: Integer;
+begin
+  ICE_IPCSDK_Init();
+
+  strStorePath := 'D:\';
+  nTotalNum := 0;
+  begin
+  with ListView_IP do
+  begin
+    Columns.Add;
+    Columns.Items[0].Caption := '设备列表';
+    Columns.Items[0].Width := ListView_IP.Width;
+  end
+  end;
+
+  begin
+  with ListView_SpaceInfo do
+  begin
+    for i:=0 to 8 do
+    begin
+      Columns.Add;
+      Columns.Items[i].Caption := strSpaceTitle[i];
+      if (i = 1) or (i = 2) then
+      begin
+        Columns.Items[i].Width := ListView_SpaceInfo.Width div 11 * 2;
+      end
+      else
+      begin
+        Columns.Items[i].Width := ListView_SpaceInfo.Width div 11;
+      end;
+    end;
+  end
+  end;
+
+  ICE_IPCSDK_SetDeviceEventCallBack(nil, OnDeviceEvent, nil);
+end;
+
+procedure TForm1.FormDestroy(Sender: TObject);
+var
+  count: Integer;
+  i: Integer;
+begin
+  i := 0;
+  count := ListView_IP.Items.Count;
+  if count > MAX_CONNECT_NUM then
+    count := MAX_CONNECT_NUM;
+  for i := 0 to (count - 1) do
+  begin
+    if hSDK[i] <> nil then
+    begin
+      ICE_IPCSDK_Logout(hSDK[i]);
+      hSDK[i] := nil;
+    end;
+  end;
+  
+  ICE_IPCSDK_Fini();
+end;
+
+//保存接收到的rs485和rs232串口数据
+procedure SavePortLog(dataType: Integer; pcIP: PChar; count: Integer; pcData: PChar; len: Integer);
+var
+  dirPath: String;
+  fileName: String;
+  fileLog : Textfile;
+  fh:THandle;
+  strText : String;
+  i : Integer;
+begin
+  dirPath := '.\DelphiLog';
+  strText := FormatDateTime('yyyyy-mm-dd hh:nn:ss', now) + ' :' + IntToStr(count) + ',';
+
+   if not DirectoryExists(dirPath) then
+    if not ForceDirectories(dirPath) then
+      begin
+        showmessage(' 创建文件夹不成功！');
+        exit;
+      end;
+   fileName := dirPath + '\' + strPas(pcIP);
+   //if ((dataType = 0) AND cbRs485.Checked) then
+   //begin
+   // fileName := fileName + '_rs485.txt';
+   //end
+  // else
+  //if ((dataType = 1) AND cbRs232.Checked) then
+  if (dataType = 1) then
+   begin
+    fileName := fileName + '_rs232.txt';
+   end
+   else
+   begin
+    exit;
+   end;
+
+   for i := 0 to (len-1) do
+   begin
+    strText := strText + format('%.2X', [ord(pcData[i])]) + ' ';
+   end;
+
+   if not fileExists(fileName) then
+   begin
+    fh := FileCreate(fileName);
+    FileClose(fh);
+   end;
+   AssignFile(fileLog, fileName);
+   Append(fileLog);
+   Writeln(fileLog, strText);
+   CloseFile(fileLog);
+end;
+
+//显示接收到的串口数据个数在界面上
+procedure TForm1.WMPortMsg(var msg:TMessage);
+var
+  index: Integer;
+  strText: String;
+  count: Integer;
+begin
+  index := Integer(msg.WParam);
+  count := 0;
+
+  if hSDK[index] <> nil then
+  begin
+    if (portMsgRec[index].dataType = 0) then
+    begin
+      count_RS485[index] := count_RS485[index] + 1;
+      count :=  count_RS485[index];
+      strText := IntToStr(count_RS485[index]) + ': ' + strPas(portMsgRec[index].ip)
+      + '接收到rs485数据 ' + IntToStr(portMsgRec[index].len) + '字节数';
+    end
+    else if (portMsgRec[index].datatype = 1) then
+    begin
+      count_RS232[index] := count_RS232[index] + 1;
+      count := count_RS232[index];
+      strText := IntToStr(count_RS232[index]) + ': ' + strPas(portMsgRec[index].ip)
+      + '接收到rs232数据 ' + IntToStr(portMsgRec[index].len) + '字节数';
+    end;
+
+    if listBoxInfo.Items.Count > 500 then
+      listBoxInfo.Items.Clear;
+    listBoxInfo.Items.Insert(0, strText);
+
+    if CheckBox_SaveLog_232.Checked then
+      SavePortLog(portMsgRec[index].dataType, portMsgRec[index].ip, count,
+                portMsgRec[index].data, portMsgRec[index].len);
+  end;
+end;
+
+procedure OnSerialPort(pvParam: Pointer; pcIP: PChar; pcData: PChar; u32Len: ICE_U32);stdcall;
+var
+  index: Integer;
+begin
+//注意：回调的代码是运行在dll里的，只要在dll和exe之间传递string类型或者动态数组，就会有问题，
+  //postMessage以后，消息响应就运行在exe里了
+  index := PInteger(@pvParam)^;
+  CopyMemory(@portMsgRec[index].ip[0], pcIP, StrLen(pcIP) + 1);
+  portMsgRec[index].dataType := 0;
+  portMsgRec[index].len := u32Len;
+  CopyMemory(@portMsgRec[index].data[0], pcData, u32Len);
+  PostMessage(Form1.Handle, WM_PORTMSG, index, 0);
+end;
+
+procedure OnSerialPort_RS232(pvParam: Pointer; pcIP: PChar; pcData: PChar; u32Len: ICE_U32);stdcall;
+var
+  index: Integer;
+begin
+//注意：回调的代码是运行在dll里的，只要在dll和exe之间传递string类型或者动态数组，就会有问题，
+  //postMessage以后，消息响应就运行在exe里了
+  index := PInteger(@pvParam)^;
+  CopyMemory(@portMsgRec[index].ip[0], pcIP, StrLen(pcIP) + 1);
+  portMsgRec[index].dataType := 1;
+  portMsgRec[index].len := u32Len;
+  CopyMemory(@portMsgRec[index].data[0], pcData, u32Len);
+  PostMessage(Form1.Handle, WM_PORTMSG, index, 0);
+end;
+
+procedure TForm1.WMUser(var msg:TMessage);
+var
+  index: Integer;
+  i: Integer;
+  strIP: String;
+  stSpaceStatus: ICE_PARKING_SPACE_RESULT_S;
+begin
+
+  index := Integer(msg.WParam);
+  stSpaceStatus := msgRec[index].stParkingResult;
+  strIP := StrPas(@(msgRec[index].ip[0]));
+
+  for i := 0 to (stSpaceStatus.u8ParkingPlaceNum - 1) do
+    begin
+      if ListView_SpaceInfo.Items.Count > 500 then
+        ListView_SpaceInfo.Items.Clear;
+      nTotalNum := nTotalNum + 1;
+      with ListView_SpaceInfo.Items.Insert(0) do
+      begin
+        caption := IntToStr(nTotalNum);
+        subitems.Add(strIP);
+        subitems.Add(FormatDateTime('yyyy-mm-dd hh:nn:ss', now));
+        subitems.Add(IntToStr(i + 1));
+        if (stSpaceStatus.astOutput[i].enParkingPlaceStatus >= 0) and (stSpaceStatus.astOutput[i].enParkingPlaceStatus <= 8) then
+          subitems.Add(getSpaceStatus(stSpaceStatus.astOutput[i].enParkingPlaceStatus));
+        subitems.Add(stSpaceStatus.astOutput[i].stPlateInfo.as8PlateNum);
+        if (stSpaceStatus.astOutput[i].stPlateInfo.ePlateColor >= 0) and (stSpaceStatus.astOutput[i].stPlateInfo.ePlateColor < 7) then
+          subitems.Add(strPlateColor[stSpaceStatus.astOutput[i].stPlateInfo.ePlateColor]);
+        if (stSpaceStatus.astOutput[i].s32CarType >= 0) and (stSpaceStatus.astOutput[i].s32CarType < 3) then
+          subitems.Add(strCarType[stSpaceStatus.astOutput[i].s32CarType]);
+        if (stSpaceStatus.astOutput[i].s32EventType < 3) and (stSpaceStatus.astOutput[i].s32EventType >= 0) then
+          subitems.Add(strEventType[stSpaceStatus.astOutput[i].s32EventType]);
+      end;
+    end;
+
+    if msgRec[index].len > 0 then
+    begin
+      savePic(msgRec[index].pic, msgRec[index].len, msgRec[index].ip);
+    end;
+end;
+
+procedure OnParkingSpaceInfo(pvParam: Pointer; pcIP: ICE_PCHAR; pstParkingResult: PSpaceResult; pcPicData: PChar;
+                                          u32PicLen: ICE_U32; pvReserve: Pointer; u32Reserve1: ICE_U32; u32Reserve2: ICE_U32;
+                                          u32Reserve3: ICE_U32; u32Reserve4: ICE_U32);stdcall;
+var
+  index: Integer;
+begin
+  index := PInteger(@pvParam)^;
+  CopyMemory(@msgRec[index].ip[0], pcIP, Strlen(pcIP) + 1);
+  CopyMemory(@msgRec[index].pic[0], pcPicData, u32PicLen);
+  msgRec[index].len := u32PicLen;
+  CopyMemory(@msgRec[index].stParkingResult, pstParkingResult, Sizeof(ICE_PARKING_SPACE_RESULT_S));
+
+  PostMessage(Form1.Handle, WM_MYMESSAGE, index, 0);
+end;
+
+procedure TForm1.Button_LoginClick(Sender: TObject);
+var
+index: Integer;
+success: Integer;
+begin
+  index := 0;
+  success := 0;
+  if ListView_IP.Selected <> nil then
+  begin
+    index := ListView_IP.Selected.Index;
+    if (index < MAX_CONNECT_NUM) and (hSDK[index] <> nil) then
+    begin
+      showmessage('选中的设备正在使用中，请断开后再尝试。');
+      exit;
+    end;
+  end
+  else begin
+    if (ListView_IP.Items.Count < MAX_CONNECT_NUM) then
+      index := ListView_IP.Items.Count;
+  end;
+
+  hSDK[index] := ICE_IPCSDK_Login(PChar(EditIP.Text), '', '', nil, nil, nil, 1);
+  if hSDK[index] <> nil then
+  begin
+    if index = 0 then
+    begin
+      ICE_IPCSDK_StartStream(hSDK[index], 1, Panel1.Handle);
+    end
+    else if index = 1 then
+    begin
+      ICE_IPCSDK_StartStream(hSDK[index], 1, Panel2.Handle);
+    end
+    else if index = 2 then
+    begin
+      ICE_IPCSDK_StartStream(hSDK[index], 1, Panel3.Handle);
+    end
+    else if index = 3 then
+    begin
+      ICE_IPCSDK_StartStream(hSDK[index], 1, Panel4.Handle);
+    end;
+
+    ICE_IPCSDK_SetParkingSpaceInfoCallBack(hSDK[index], onParkingSpaceInfo, Pointer(index));
+    ICE_IPCSDK_SetSerialPortCallBack(hSDK[index], onSerialPort, Pointer(index));
+    ICE_IPCSDK_SetSerialPortCallBack_RS232(hSDK[index], onSerialPort_RS232, Pointer(index));
+
+    success := ICE_IPCSDK_GetParkingSpaceNum(hSDK[index], @nTotalSpaceNum[index]);
+    if success = 0 then
+       nTotalSpaceNum[index] := 2;
+       
+    if ListView_IP.Selected <> nil then
+    begin
+      ListView_IP.Selected.Caption := EditIP.Text;
+      Button_Login.Enabled := false;
+      Button_Logout.Enabled := true;
+      Button_System.Enabled := true;
+      Button_Uart.Enabled := true;
+      Button_Algo.Enabled := true;
+      Button_RS485.Enabled := true;
+      Button_RS232.Enabled := true;
+      Button_Single.Enabled := true;
+      Button_All.Enabled := true;
+      Button_lightCtrl.Enabled := true;
+      Button_syncTime.Enabled := true;
+      Button_getDevTime.Enabled := true;
+    end
+    else
+    begin
+      with ListView_IP.Items.Add do
+      begin
+        caption := EditIP.Text;
+      end;
+    end;
+  end
+  else
+  begin
+    showMessage('登录失败');
+  end;
+end;
+
+procedure TForm1.Button_LogoutClick(Sender: TObject);
+var
+  index: Integer;
+begin
+  if ListView_IP.Selected <> nil then
+  begin
+    index := ListView_IP.Selected.Index;
+    if (index < MAX_CONNECT_NUM) and (hSDK[index] <> nil) then
+    begin
+      ICE_IPCSDK_Logout(hSDK[index]);
+      hSDK[index] := nil;
+    end;
+    Button_Login.Enabled := true;
+    Button_Logout.Enabled := false;
+    Button_System.Enabled := false;
+    Button_Uart.Enabled := false;
+    Button_Algo.Enabled := false;
+    Button_RS485.Enabled := false;
+    Button_RS232.Enabled := false;
+    Button_Single.Enabled := false;
+    Button_All.Enabled := false;
+    Button_lightCtrl.Enabled := false;
+    Button_syncTime.Enabled := false;
+    Button_getDevTime.Enabled := false;
+
+    nTotalSpaceNum[index] := 0;
+  end;
+end;
+
+procedure TForm1.ListView_IPClick(Sender: TObject);
+var
+  index: Integer;
+begin
+  if ListView_IP.Selected = nil then
+    exit;
+  EditIP.Text := ListView_IP.Selected.Caption;
+  index := ListView_IP.Selected.Index;
+  if (index < MAX_CONNECT_NUM) and (hSDK[index] <> nil) then
+  begin
+    Button_Login.Enabled := false;
+    Button_Logout.Enabled := true;
+    Button_System.Enabled := true;
+    Button_Uart.Enabled := true;
+    Button_Algo.Enabled := true;
+    Button_RS485.Enabled := true;
+    Button_RS232.Enabled := true;
+    Button_Single.Enabled := true;
+    Button_All.Enabled := true;
+    Button_lightCtrl.Enabled := true;
+    Button_syncTime.Enabled := true;
+    Button_getDevTime.Enabled := true;
+  end
+  else
+  begin
+    Button_Login.Enabled := true;
+    Button_Logout.Enabled := false;
+    Button_System.Enabled := false;
+    Button_Uart.Enabled := false;
+    Button_Algo.Enabled := false;
+    Button_RS485.Enabled := false;
+    Button_RS232.Enabled := false;
+    Button_Single.Enabled := false;
+    Button_All.Enabled := false;
+    Button_lightCtrl.Enabled := false;
+    Button_syncTime.Enabled := false;
+      Button_getDevTime.Enabled := false;
+  end;
+end;
+
+procedure TForm1.ListView_IPMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+  index: Integer;
+  i: Integer;
+begin
+  i := 0;
+  if ListView_IP.Selected <> nil then
+  begin
+    index := ListView_IP.Selected.Index;
+    if (index < MAX_CONNECT_NUM) and (hSDK[index] <> nil) then
+    begin
+      comboBox_SpaceNum.Items.Clear;
+      if nTotalSpaceNum[index] > 0 then
+      begin
+        for i := 1 to nTotalSpaceNum[index] do
+        begin
+          comboBox_SpaceNum.Items.Add(IntToStr(i));
+        end;
+      end;
+      comboBox_SpaceNum.ItemIndex := 0;
+      Button_Login.Enabled := false;
+      Button_Logout.Enabled := true;
+      Button_System.Enabled := true;
+      Button_Uart.Enabled := true;
+      Button_Algo.Enabled := true;
+      Button_RS485.Enabled := true;
+      Button_RS232.Enabled := true;
+      Button_Single.Enabled := true;
+      Button_All.Enabled := true;
+      Button_lightCtrl.Enabled := true;
+      Button_syncTime.Enabled := true;
+      Button_getDevTime.Enabled := true;
+    end;
+  end
+  else
+  begin
+    EditIP.Text := '192.168.55.100';
+    Button_Login.Enabled := true;
+    Button_Logout.Enabled := false;
+    Button_System.Enabled := false;
+    Button_Uart.Enabled := false;
+    Button_Algo.Enabled := false;
+    Button_RS485.Enabled := false;
+    Button_RS232.Enabled := false;
+    Button_Single.Enabled := false;
+    Button_All.Enabled := false;
+    Button_lightCtrl.Enabled := false;
+    Button_syncTime.Enabled := false;
+    Button_getDevTime.Enabled := false;
+  end;
+end;
+
+procedure TForm1.Button_UartClick(Sender: TObject);
+var
+uartParam: ICE_UART_PARAM;
+index: Integer;
+begin
+  if ListView_IP.Selected = nil then
+    exit;
+  index := ListView_IP.Selected.Index;
+   if (index < MAX_CONNECT_NUM) and (hSDK[index] <> nil) then
+   begin
+      if ICE_IPCSDK_GetUARTCfg(hSDK[index], @uartParam) = 0 then //获取串口设置
+      begin
+        showmessage('获取串口设置失败');
+      exit;
+      end;
+   end;
+
+   FormUartSet.setValue(uartParam);
+
+  if FormUartSet.ShowModal = mrOk then
+  begin
+    uartParam := FormUartSet.getValue();
+    if ICE_IPCSDK_SetUARTCfg(hSDK[index], @uartParam) = 0 then  //设置串口设置
+      showmessage('串口设置失败');
+  end;
+end;
+
+procedure TForm1.Button_RS232Click(Sender: TObject);
+var
+  index: Integer;
+begin
+  if ListView_IP.Selected = nil then
+    exit;
+  index := ListView_IP.Selected.Index;
+  if (index < MAX_CONNECT_NUM) and (hSDK[index] <> nil) then
+  begin
+    FormTrans.hSDK := hSDK[index];
+    FormTrans.nType := 1;
+
+    FormTrans.ShowModal;
+  end;
+end;
+
+procedure TForm1.Button_SystemClick(Sender: TObject);
+var
+  index: Integer;
+  nSpaceEn, nSpaceType: array[0..(MAX_CONNECT_NUM-1)] of Integer;
+  strRemoteIP, strControlIP, strRemoteIPDst, strControlIPDst: PChar;
+  nRemoteEnable, nControlEnable: Integer;
+  i: Integer;
+  stHttpParam: http_conf_t;
+begin
+  if ListView_IP.Selected = nil then
+    exit;
+  index := ListView_IP.Selected.Index;
+  if (index >= MAX_CONNECT_NUM) or (hSDK[index] = nil) then
+     exit;
+  strRemoteIP := strAlloc(32 * sizeof(char));
+  strControlIP := strAlloc(32 * sizeof(char));
+
+  for i := 0 to (nToTalSpaceNum[index]-1) do
+  begin
+     ICE_IPCSDK_GetEnableParkingSpace(hSDK[index], i, @nSpaceEn[i]);
+     ICE_IPCSDK_GetParkingSpaceType(hSDK[index], i, @nSpaceType[i]);
+  end;
+
+  ICE_IPCSDK_GetRemoteDevState(hSDK[index], @nRemoteEnable, strRemoteIP, nil, nil);
+  ICE_IPCSDK_GetControlDevState(hSDK[index], @nControlEnable, strControlIP, nil, nil);
+  ICE_IPCSDK_GetCGIParam(hSDK[index], @stHttpParam);
+  SystemCfg.setValue(nToTalSpaceNum[index], nSpaceEn, nSpaceType, strRemoteIP, nRemoteEnable, strControlIP, nControlEnable);
+  if SystemCfg.ShowModal = mrCancel then
+     exit;
+  SystemCfg.getValue(nSpaceEn, nSpaceType, strRemoteIPDst, nRemoteEnable, strControlIPDst, nControlEnable);
+  for i := 0 to (nToTalSpaceNum[index]-1) do
+  begin
+    ICE_IPCSDK_SetEnableParkingSpace(hSDK[index], i, nSpaceEn[i]);
+    ICE_IPCSDK_SetParkingSpaceType(hSDK[index], i, nSpaceType[i]);
+  end;
+
+  ICE_IPCSDK_SetRemoteDevState(hSDK[index], nRemoteEnable, strRemoteIPDst, 0, 0);
+  ICE_IPCSDK_SetControlDevState(hSDK[index], nControlEnable, strControlIPDst, 0, 0);
+
+  strDispose(strRemoteIP);
+  strDispose(strControlIP);
+end;
+
+procedure TForm1.Button_AlgoClick(Sender: TObject);
+var
+  index: Integer;
+  height: Integer;
+  width: Integer;
+  success: UINT;
+  stPlaceCfg: ICE_IPG_PLACE_CONFIG_S;
+  strText: String;
+begin
+  if ListView_IP.Selected = nil then
+    exit;
+  index := ListView_IP.Selected.Index;
+  if (index >= MAX_CONNECT_NUM) or (hSDK[index] = nil) then
+     exit;
+
+  if nTotalSpaceNum[index] = 2 then
+  begin
+    width := 1280;
+    height := 720;
+  end
+  else begin
+    width := 1920;
+    height := 1080;
+  end;
+
+  success := ICE_IPCSDK_GetAllParkingSpaceLoops(hSDK[index], @stPlaceCfg, width, height);
+  if success = 1 then
+  begin
+    strText := '相机' + IntToStr(index + 1) + '获取识别区域成功';
+    FormAlgoCfg.setValue(stPlaceCfg, width, height, nTotalSpaceNum[index]);
+    ListBoxInfo.Items.Insert(0, strText);
+  end
+  else begin
+    strText := '相机' + IntToStr(index + 1) + '获取识别区域失败';
+    ListBoxInfo.Items.Insert(0, strText);
+  end;
+
+  if FormAlgoCfg.ShowModal = mrCancel then
+     exit;
+
+  FormAlgoCfg.getValue(stPlaceCfg, width, height);
+  success :=  ICE_IPCSDK_SetAllParkingSpaceLoops(hSDK[index], @stPlaceCfg, width, height);
+  if success = 1 then
+  begin
+    strText := '相机' + IntToStr(index + 1) + '设置识别区域成功';
+    ListBoxInfo.Items.Insert(0, strText);
+  end
+  else begin
+    strText := '相机' + IntToStr(index + 1) + '设置识别区域失败';
+    ListBoxInfo.Items.Insert(0, strText);
+  end;
+end;
+
+procedure TForm1.savePic(pcPicData: PChar; u32PicLen: UINT; pcIP: PChar);
+var
+  stmPic: TFileStream;
+  dirPath: String;
+  fileName: String;
+  picName: String;
+  count: Integer;
+begin
+  if (pcPicData = nil) or (pcIP = nil) then
+    exit;
+  count := 1;
+  dirPath := strStorePath + '车位抓拍delphi\'+ strPas(pcIP) + '\' + FormatDateTime('yyyymmdd', now);
+  if not DirectoryExists(dirPath) then
+    if not ForceDirectories(dirPath) then
+      begin
+        showmessage(' 创建文件夹不成功！');
+        exit;
+      end;
+  picName := FormatDateTime('yyyyymmddhhnnss', now) + '.jpg';
+  fileName :=  dirPath + '\' + picName;
+
+  if FileExists(fileName) then
+  begin
+    while(count < 10) do
+    begin
+      fileName := dirPath + '\' + FormatDateTime('yyyyymmddhhnnss', now) + '_' + IntToStr(count) + '.jpg';
+      if not FileExists(fileName) then
+        break;
+      count := count + 1;
+    end;
+  end;
+   stmPic := TFileStream.Create(fileName, fmCreate or fmShareDenyNone);
+  //保存图片
+  if stmPic = nil then
+    exit;
+    stmPic.Seek(0,0);
+    stmPic.Write(pcPicData^, u32PicLen);
+    FreeAndNil(stmPic);
+end;
+
+Function TForm1.getSpaceStatus(nSpaceStatus: Integer):string;
+var
+  strSpaceStatus: string;
+begin
+  case nSpaceStatus of
+    0:begin
+      strSpaceStatus := '无';
+      end;
+    1:begin
+      strSpaceStatus := '车位有车';
+      end;
+    2:begin
+      strSpaceStatus := '空车位';
+      end;
+    4:begin
+      strSpaceStatus := '单车占多车位';
+      end;
+    8:begin
+      strSpaceStatus := '车位禁用';
+      end;
+  end;
+  result := strSpaceStatus;
+end;
+
+procedure TForm1.Button_SingleClick(Sender: TObject);
+var
+  index: Integer;
+  nSpaceNum: Integer;
+  pdata: PChar;
+  success: UINT;
+  len: UINT;
+  stSingleStatus: ICE_PARKING_SPACE_OUTPUT_S;
+  pos: Integer;
+begin
+   if ListView_IP.Selected = nil then
+    exit;
+  index := ListView_IP.Selected.Index;
+  if (index >= MAX_CONNECT_NUM) or (hSDK[index] = nil) then
+     exit;
+
+  pdata := strAlloc(1048576 * sizeof(char));
+  pos := ComboBox_SpaceNum.ItemIndex;
+
+  success :=  ICE_IPCSDK_GetSingleParkingSpaceStatus(hSDK[index], pos, @nSpaceNum, @stSingleStatus,
+                  pdata, 1048576, @len, nil, 0, nil);
+  if success = 1 then
+  begin
+    nTotalNum := nTotalNum + 1;
+    if ListView_SpaceInfo.Items.Count > 500 then
+      ListView_SpaceInfo.Items.Clear;
+    with ListView_SpaceInfo.Items.Insert(0) do
+    begin
+      caption := IntToStr(nTotalNum);
+      subitems.Add(ListView_IP.Selected.Caption);
+      subitems.Add(FormatDateTime('yyyy-mm-dd hh:nn:ss', now));
+      subitems.Add(IntToStr(pos + 1));
+      if (stSingleStatus.enParkingPlaceStatus >= 0) and (stSingleStatus.enParkingPlaceStatus <= 8) then
+        subitems.Add(getSpaceStatus(stSingleStatus.enParkingPlaceStatus));
+      subitems.Add(stSingleStatus.stPlateInfo.as8PlateNum);
+      if (stSingleStatus.stPlateInfo.ePlateColor >= 0) and (stSingleStatus.stPlateInfo.ePlateColor < 7) then
+        subitems.Add(strPlateColor[stSingleStatus.stPlateInfo.ePlateColor]);
+      if (stSingleStatus.s32CarType >= 0) and (stSingleStatus.s32CarType < 3) then
+        subitems.Add(strCarType[stSingleStatus.s32CarType]);
+      if (stSingleStatus.s32EventType < 3) and (stSingleStatus.s32EventType >= 0) then
+        subitems.Add(strEventType[stSingleStatus.s32EventType]);
+    end;
+
+    if len > 0 then
+    begin
+      savePic(pdata, len, PChar(ListView_IP.Selected.Caption));
+    end;
+  end;
+
+  strDispose(pdata);
+end;
+
+procedure TForm1.Button_AllClick(Sender: TObject);
+var
+  index: Integer;
+  pdata: PChar;
+  success: UINT;
+  len: UINT;
+  stSpaceStatus: ICE_PARKING_SPACE_RESULT_S;
+  i: Integer;
+begin
+   if ListView_IP.Selected = nil then
+    exit;
+  index := ListView_IP.Selected.Index;
+  if (index >= MAX_CONNECT_NUM) or (hSDK[index] = nil) then
+     exit;
+  i := 0;
+  pdata := strAlloc(1048576 * sizeof(char));
+
+  success :=  ICE_IPCSDK_GetAllParkingSpaceStatus(hSDK[index], @stSpaceStatus,
+                  pdata, 1048576, @len, nil, nil);
+  if success = 1 then
+  begin
+    for i := 0 to (stSpaceStatus.u8ParkingPlaceNum -1 ) do
+    begin
+      if ListView_SpaceInfo.Items.Count > 500 then
+        ListView_SpaceInfo.Items.Clear;
+      nTotalNum := nTotalNum + 1;
+      with ListView_SpaceInfo.Items.Insert(0) do
+      begin
+        caption := IntToStr(nTotalNum);
+        subitems.Add(ListView_IP.Selected.Caption);
+        subitems.Add(FormatDateTime('yyyy-mm-dd hh:nn:ss', now));
+        subitems.Add(IntToStr(i + 1));
+        if (stSpaceStatus.astOutput[i].enParkingPlaceStatus >= 0) and (stSpaceStatus.astOutput[i].enParkingPlaceStatus <= 8) then
+          subitems.Add(getSpaceStatus(stSpaceStatus.astOutput[i].enParkingPlaceStatus));
+        subitems.Add(stSpaceStatus.astOutput[i].stPlateInfo.as8PlateNum);
+        if (stSpaceStatus.astOutput[i].stPlateInfo.ePlateColor >= 0) and (stSpaceStatus.astOutput[i].stPlateInfo.ePlateColor < 7) then
+          subitems.Add(strPlateColor[stSpaceStatus.astOutput[i].stPlateInfo.ePlateColor]);
+        if (stSpaceStatus.astOutput[i].s32CarType >= 0) and (stSpaceStatus.astOutput[i].s32CarType < 3) then
+          subitems.Add(strCarType[stSpaceStatus.astOutput[i].s32CarType]);
+        if (stSpaceStatus.astOutput[i].s32EventType < 3) and (stSpaceStatus.astOutput[i].s32EventType >= 0) then
+          subitems.Add(strEventType[stSpaceStatus.astOutput[i].s32EventType]);
+      end;
+    end;
+
+    if len > 0 then
+    begin
+      savePic(pdata, len, PChar(ListView_IP.Selected.Caption));
+    end;
+  end;
+
+  strDispose(pdata);
+end;
+
+procedure TForm1.Button_RS485Click(Sender: TObject);
+var
+  index: Integer;
+begin
+  if ListView_IP.Selected = nil then
+    exit;
+  index := ListView_IP.Selected.Index;
+  if (index < MAX_CONNECT_NUM) and (hSDK[index] <> nil) then
+  begin
+    FormTrans.hSDK := hSDK[index];
+    FormTrans.nType := 0;
+
+    FormTrans.ShowModal;
+  end;
+end;
+
+procedure TForm1.N2Click(Sender: TObject);
+begin
+  FormIPSearch.ShowModal;
+end;
+
+procedure TForm1.Button_lightCtrlClick(Sender: TObject);
+var
+  stLightCtlParam: LightCtlParam;
+  success: UINT;
+  index: Integer;
+  nLightEn: Integer;
+  nColor: Integer;
+  strText: string;
+begin
+  if ListView_IP.Selected = nil then
+    exit;
+  index := ListView_IP.Selected.Index;
+  if (index >= MAX_CONNECT_NUM) or (hSDK[index] = nil) then
+     exit;
+
+  success := ICE_IPCSDK_GetLightCtlParam(hSDK[index], @stLightCtlParam);
+
+  if success = 1 then
+  begin
+    strText := '相机' + IntToStr(index + 1) + '获取强制控灯参数成功';
+    ListBoxInfo.Items.Insert(0, strText);
+  end
+  else begin
+    strText := '相机' + IntToStr(index + 1) + '获取强制控灯参数失败';
+    ListBoxInfo.Items.Insert(0, strText);
+    exit;
+  end;
+
+  nLightEn := 0;
+  nColor := 0;
+
+  FormLightCtrl.setValue(stLightCtlParam.u8LightEn, stLightCtlParam.u8Color);
+  if FormLightCtrl.ShowModal = mrCancel then
+     exit;
+  FormLightCtrl.getValue(nLightEn, nColor);
+  stLightCtlParam.u8LightEn := nLightEn;
+  stLightCtlParam.u8Color := nColor;
+
+  success := ICE_IPCSDK_SetLightCtlParam(hSDK[index], @stLightCtlParam);
+   if success = 1 then
+  begin
+    strText := '相机' + IntToStr(index + 1) + '设置强制控灯参数成功';
+    ListBoxInfo.Items.Insert(0, strText);
+  end
+  else begin
+    strText := '相机' + IntToStr(index + 1) + '设置强制控灯参数失败';
+    ListBoxInfo.Items.Insert(0, strText);
+    exit;
+  end;
+end;
+
+procedure TForm1.Button_syncTimeClick(Sender: TObject);
+var
+  Present: TDateTime;
+  Year, Month, Day, Hour, Min, Sec, MSec:Word;
+  success: UINT;
+  index: Integer;
+  strText: string;
+begin
+  if ListView_IP.Selected = nil then
+    exit;
+  index := ListView_IP.Selected.Index;
+  if (index >= MAX_CONNECT_NUM) or (hSDK[index] = nil) then
+     exit;
+
+  Present:= Now; 
+  DecodeDate(Present, Year, Month, Day);
+  DecodeTime(Present, Hour, Min, Sec, MSec);
+
+  success := ICE_IPCSDK_SyncTime(hSDK[index], Year, Month, Day, Hour, Min, Sec);
+
+  if success = 1 then
+  begin
+    strText := '相机' + IntToStr(index + 1) + '时间同步成功';
+    ListBoxInfo.Items.Insert(0, strText);
+  end
+  else begin
+    strText := '相机' + IntToStr(index + 1) + '时间同步失败';
+    ListBoxInfo.Items.Insert(0, strText);
+    exit;
+  end;
+end;
+
+procedure TForm1.Button_getDevTimeClick(Sender: TObject);
+var
+  Year: Word;
+  Month, Day, Hour, Min, Sec: Byte;
+  success: UINT;
+  index: Integer;
+  strText: string;
+begin
+  if ListView_IP.Selected = nil then
+    exit;
+  index := ListView_IP.Selected.Index;
+  if (index >= MAX_CONNECT_NUM) or (hSDK[index] = nil) then
+     exit;
+
+   success := ICE_IPCSDK_GetDevTime(hSDK[index], @Year, @Month, @Day, @Hour, @Min, @Sec);
+
+  if success = 1 then
+  begin
+    strText := '相机' + IntToStr(index + 1) + '时间:' + format('%.4d', [Year]) + '-' + format('%.2d', [Month]) + '-'
+                + format('%.2d', [Day]) + ' ' + format('%.2d', [Hour]) + ':' + format('%.2d', [Min]) + ':' + format('%.2d', [Sec]);
+    ListBoxInfo.Items.Insert(0, strText);
+  end
+  else begin
+    strText := '相机' + IntToStr(index + 1) + '时间同步失败';
+    ListBoxInfo.Items.Insert(0, strText);
+    exit;
+  end;
+end;
+
+end.

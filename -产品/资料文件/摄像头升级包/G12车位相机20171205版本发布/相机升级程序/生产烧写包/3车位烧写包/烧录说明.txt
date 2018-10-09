@@ -1,0 +1,11 @@
+烧录包里，包含了所有分区的内容，只需要一次烧写。
+
+烧录步骤
+进入uboot,配置相机的IP 与PC 同一网段：
+setenv ipaddr 192.168.1.40
+setenv serverip 192.168.1.184
+sa
+
+烧录指令
+mw.b 0x82000000 ff 0x2000000;tftp 0x82000000 IPG_all_0230_1205.bin
+sf probe 0;sf erase 0x0 0x1000000;sf write 0x82000000 0x0 0x1000000

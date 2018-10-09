@@ -1,0 +1,161 @@
+object SystemCfg: TSystemCfg
+  Left = 534
+  Top = 125
+  Width = 443
+  Height = 512
+  Caption = #31995#32479#21442#25968
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 24
+    Top = 16
+    Width = 377
+    Height = 153
+    Caption = #36710#20301#21442#25968
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 24
+      Top = 32
+      Width = 60
+      Height = 13
+      Caption = #36710#20301#32534#21495#65306
+    end
+    object Label2: TLabel
+      Left = 24
+      Top = 64
+      Width = 60
+      Height = 13
+      Caption = #20351#33021#36710#20301#65306
+    end
+    object Label3: TLabel
+      Left = 24
+      Top = 112
+      Width = 60
+      Height = 13
+      Caption = #36710#20301#31867#22411#65306
+    end
+    object ComboBox_SpaceNum: TComboBox
+      Left = 104
+      Top = 24
+      Width = 145
+      Height = 21
+      Style = csDropDownList
+      ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+      ItemHeight = 13
+      TabOrder = 0
+      OnChange = ComboBox_SpaceNumChange
+    end
+    object RadioGroup_Enable: TRadioGroup
+      Left = 104
+      Top = 48
+      Width = 241
+      Height = 41
+      Columns = 2
+      TabOrder = 1
+    end
+    object RadioGroup_Type: TRadioGroup
+      Left = 104
+      Top = 96
+      Width = 241
+      Height = 41
+      Columns = 3
+      TabOrder = 2
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 24
+    Top = 192
+    Width = 377
+    Height = 193
+    Caption = #25511#28783#21442#25968
+    TabOrder = 1
+    object Label4: TLabel
+      Left = 16
+      Top = 24
+      Width = 84
+      Height = 13
+      Caption = #36828#31243#25511#28783#21442#25968#65306
+    end
+    object Label5: TLabel
+      Left = 32
+      Top = 72
+      Width = 109
+      Height = 13
+      Caption = #36828#31243#25511#21046#20854#20182#30456#26426'IP:'
+    end
+    object Label6: TLabel
+      Left = 16
+      Top = 104
+      Width = 72
+      Height = 13
+      Caption = #21463#25511#28783#21442#25968#65306
+    end
+    object Label7: TLabel
+      Left = 32
+      Top = 160
+      Width = 118
+      Height = 13
+      Caption = #21463#25511#20110#36828#31243#30456#26426#30340'IP'#65306
+    end
+    object CheckBox_Remote: TCheckBox
+      Left = 32
+      Top = 48
+      Width = 145
+      Height = 17
+      Caption = #36828#31243#25511#21046#20854#20182#30456#26426
+      TabOrder = 0
+    end
+    object Edit_RemoteIP: TEdit
+      Left = 184
+      Top = 64
+      Width = 145
+      Height = 21
+      ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+      TabOrder = 1
+    end
+    object CheckBox_Control: TCheckBox
+      Left = 32
+      Top = 128
+      Width = 121
+      Height = 17
+      Caption = #21463#25511#20110#36828#31243#30456#26426
+      TabOrder = 2
+    end
+    object Edit_ControlIP: TEdit
+      Left = 184
+      Top = 152
+      Width = 145
+      Height = 21
+      ImeName = #20013#25991'('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+      TabOrder = 3
+    end
+  end
+  object Button_OK: TButton
+    Left = 64
+    Top = 424
+    Width = 75
+    Height = 25
+    Caption = #30830#23450
+    TabOrder = 2
+    OnClick = Button_OKClick
+  end
+  object Button_Cancle: TButton
+    Left = 288
+    Top = 424
+    Width = 75
+    Height = 25
+    Caption = #21462#28040
+    TabOrder = 3
+    OnClick = Button_CancleClick
+  end
+end

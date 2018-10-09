@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>进出车位数据上报逻辑优化</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/进出车位数据上报逻辑优化/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/进出车位数据上报逻辑优化/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u567" class="ax_default box_2">
+        <div id="u567_div" class=""></div>
+        <div id="u567_text" class="text ">
+          <p style="font-size:15px;"><span>现有问题：</span></p><p style="font-size:16px;"><span>1、mpgs记录的图片，有时是车刚刚停进去的记录，还是个无牌车的记录，但是探头是有拍新的，图片不更新，经常的图片就是那个车头灯还亮着的图片；</span></p><p style="font-size:16px;"><span>2、只拍了车辆停到一半的图片，车辆停稳后的图片不再上报。</span></p><p style="font-size:16px;"><span>……</span></p><p style="font-size:16px;"><span><br></span></p><p style="font-size:16px;"><span>逻辑优化说明：</span></p><p style="font-size:16px;"><span>1、去掉车位最短变更时间的判断；去掉参数配置中“车位最短变更时间”配置项；</span></p><p style="font-size:16px;"><span>2、去掉无牌车变化最小次数的判断；去掉参数配置中“无牌车接受业务变化的最小次数”配置项</span></p><p style="font-size:16px;"><span>3、详细逻辑见以下流程.</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u568" class="ax_default image">
+        <img id="u568_img" class="img " src="images/进出车位数据上报逻辑优化/u568.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u569" class="ax_default box_1">
+        <div id="u569_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u570" class="ax_default box_1">
+        <div id="u570_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u571" class="ax_default icon">
+        <img id="u571_img" class="img " src="images/进出车位数据上报逻辑优化/u571.png"/>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u572" class="ax_default icon">
+        <img id="u572_img" class="img " src="images/进出车位数据上报逻辑优化/u571.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u573" class="ax_default image">
+        <img id="u573_img" class="img " src="images/进出车位数据上报逻辑优化/u573.jpg"/>
+      </div>
+    </div>
+  </body>
+</html>

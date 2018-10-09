@@ -1,0 +1,7 @@
+﻿$axure.loadCurrentPage(
+(function() {
+    var _ = function() { var r={},a=arguments; for(var i=0; i<a.length; i+=2) r[a[i]]=a[i+1]; return r; }
+    var _creator = function() { return _(b,c,d,e,f,g,h,g,i,[j],k,_(l,m,n,o,p,q,r,_(s,t),u,_(v,w,x,y,z,_(A,B,C,D),E,null,F,y,G,y,H,I,J,null,K,L,M,N,O,P,Q,L),R,_(),S,_(),T,_(U,[])),V,_(),W,_());}; 
+var b="url",c="车主管理.html",d="generationDate",e=new Date(1487213997787.37),f="isCanvasEnabled",g=false,h="isAdaptiveEnabled",i="variables",j="OnLoadVariable",k="page",l="packageId",m="33a7ec9ac7ba4f1598dae5bad01d3743",n="type",o="Axure:Page",p="name",q="车主管理",r="notes",s="备注",t="<p><span>与收费管理系统一致，但是里面的通道基础信息和播报基础信息以MPGS的为准</span><span>。此模块支持与收费系统联动，即在收费系统里面添加后会</span><span>通过</span><span>HTTP接口</span><span>同步推送到这里，这里接收并显示。</span></p>",u="style",v="baseStyle",w="627587b6038d43cca051c114ac41ad32",x="pageAlignment",y="near",z="fill",A="fillType",B="solid",C="color",D=0xFFFFFFFF,E="image",F="imageHorizontalAlignment",G="imageVerticalAlignment",H="imageRepeat",I="auto",J="favicon",K="sketchFactor",L="0",M="colorStyle",N="appliedColor",O="fontName",P="Applied Font",Q="borderWidth",R="adaptiveStyles",S="interactionMap",T="diagram",U="objects",V="masters",W="objectPaths";
+return _creator();
+})());

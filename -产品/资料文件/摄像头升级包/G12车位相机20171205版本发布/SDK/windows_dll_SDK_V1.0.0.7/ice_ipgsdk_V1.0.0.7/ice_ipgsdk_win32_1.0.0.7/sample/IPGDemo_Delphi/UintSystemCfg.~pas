@@ -1,0 +1,173 @@
+unit UintSystemCfg;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, ipgsdk;
+
+const
+   MAX_CONNECT_NUM= 4;
+type
+  TSystemCfg = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    ComboBox_SpaceNum: TComboBox;
+    RadioGroup_Enable: TRadioGroup;
+    RadioGroup_Type: TRadioGroup;
+    GroupBox2: TGroupBox;
+    Label4: TLabel;
+    CheckBox_Remote: TCheckBox;
+    Label5: TLabel;
+    Edit_RemoteIP: TEdit;
+    Label6: TLabel;
+    CheckBox_Control: TCheckBox;
+    Label7: TLabel;
+    Edit_ControlIP: TEdit;
+    Button_OK: TButton;
+    Button_Cancle: TButton;
+    procedure Button_CancleClick(Sender: TObject);
+    procedure Button_OKClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ComboBox_SpaceNumChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure setValue(totalNum: Integer; spaceEn: array of Integer; spaceType: array of Integer;
+                        remoteIp: String; remoteEn: Integer; controlIp: String; controlEn: Integer;
+                        httpParam: http_conf_t);
+    procedure getValue(var spaceEn: array of Integer; var spaceType: array of Integer;
+                        var remoteIp: PChar; var remoteEn: Integer; var controlIp: PChar; var controlEn: Integer;
+                        var httpParam: http_conf_t);
+  end;
+
+var
+  SystemCfg: TSystemCfg;
+  nSpaceNum: Integer;
+  nSpaceEn: array[0..(MAX_CONNECT_NUM-1)] of Integer;
+  nSpaceType: array[0..(MAX_CONNECT_NUM-1)] of Integer;
+  strRemoteIP, strControlIP: String;
+  nRemoteEnable, nControlEnable: Integer;
+  nSpaceCode: Integer;
+  stHttpParam: http_conf_t;
+
+implementation
+
+{$R *.dfm}
+
+procedure TSystemCfg.Button_CancleClick(Sender: TObject);
+begin
+  self.ModalResult := mrCancel;
+end;
+
+procedure TSystemCfg.Button_OKClick(Sender: TObject);
+begin
+  nSpaceCode := ComboBox_SpaceNum.ItemIndex;
+  nSpaceEn[nSpaceCode] := RadioGroup_Enable.ItemIndex;
+  nSpaceType[nSpaceCode] := RadioGroup_Type.ItemIndex;
+
+  if CheckBox_Remote.Checked then
+  begin
+    nRemoteEnable := 1;
+  end
+  else begin
+    nRemoteEnable := 0;
+  end;
+
+  if CheckBox_Control.Checked then
+  begin
+    nControlEnable := 1;
+  end
+  else begin
+    nControlEnable := 0;
+  end;
+
+  strRemoteIP := Edit_RemoteIP.Text;
+  strControlIP := Edit_ControlIP.Text;
+  self.ModalResult := mrOk;
+end;
+
+procedure TSystemCfg.setValue(totalNum: Integer; spaceEn: array of Integer; spaceType:array of Integer;
+                              remoteIp: String; remoteEn: Integer; controlIp: String; controlEn: Integer;
+                              httpParam: http_conf_t);
+begin
+  nSpaceNum := totalNum;
+  strRemoteIP := remoteIp;
+  strControlIP := controlIp;
+  nRemoteEnable := remoteEn;
+  nControlEnable := controlEn;
+  Move(spaceEn, nSpaceEn, MAX_CONNECT_NUM*sizeof(Integer));
+  Move(spaceType, nSpaceType, MAX_CONNECT_NUM*sizeof(Integer));
+end;
+
+procedure TSystemCfg.FormShow(Sender: TObject);
+var
+  i: Integer;
+begin
+  comboBox_SpaceNum.Items.Clear;
+  for i := 1 to nSpaceNum do
+  begin
+  comboBox_SpaceNum.Items.Add(IntToStr(i));
+  end;
+  comboBox_SpaceNum.ItemIndex := 0;
+  nSpaceCode := 0;
+
+  RadioGroup_Enable.ItemIndex :=  nSpaceEn[0];
+  RadioGroup_Type.ItemIndex := nSpaceType[0];
+
+  if nRemoteEnable = 1 then
+  begin
+    CheckBox_Remote.Checked := true;
+  end
+  else begin
+    CheckBox_Remote.Checked := false;
+  end;
+
+  if nControlEnable = 1 then
+  begin
+    CheckBox_Control.Checked := true;
+  end
+  else begin
+    CheckBox_Control.Checked := false;
+  end;
+
+   Edit_RemoteIP.Text := strRemoteIP;
+   Edit_ControlIP.Text := strControlIP;
+end;
+
+procedure TSystemCfg.FormCreate(Sender: TObject);
+begin
+  RadioGroup_Enable.Items.Add('禁用');
+  RadioGroup_Enable.Items.Add('使能');
+
+  RadioGroup_Type.Items.Add('临时');
+  RadioGroup_Type.Items.Add('预定');
+  RadioGroup_Type.Items.Add('固定');
+end;
+
+procedure TSystemCfg.ComboBox_SpaceNumChange(Sender: TObject);
+begin
+  nSpaceEn[nSpaceCode] := RadioGroup_Enable.ItemIndex;
+  nSpaceType[nSpaceCode] := RadioGroup_Type.ItemIndex;
+
+  nSpaceCode := ComboBox_SpaceNum.ItemIndex;
+  RadioGroup_Enable.ItemIndex :=  nSpaceEn[nSpaceCode];
+  RadioGroup_Type.ItemIndex := nSpaceType[nSpaceCode];
+end;
+
+ procedure TSystemCfg.getValue(var spaceEn: array of Integer; var spaceType: array of Integer;
+                        var remoteIp: PChar; var remoteEn: Integer; var controlIp: PChar;
+                        var controlEn: Integer; var httpParam: http_conf_t);
+begin
+  remoteIp := PChar(strRemoteIP);
+  controlIp := PChar(strControlIP);
+  remoteEn := nRemoteEnable;
+  controlEn := nControlEnable;
+  Move(nSpaceEn, spaceEn, MAX_CONNECT_NUM*sizeof(Integer));
+  Move(nSpaceType, spaceType, MAX_CONNECT_NUM*sizeof(Integer));
+end;
+end.

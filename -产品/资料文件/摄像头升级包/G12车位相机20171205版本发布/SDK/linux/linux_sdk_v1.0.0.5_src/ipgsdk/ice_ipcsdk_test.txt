@@ -1,0 +1,1 @@
+g++ ice_ipcsdk_test.c -o ice_ipgsdk_test -Wall -O2 -DCOMPILEUTF8 .libs/libice_ipgsdk.a -lpthread

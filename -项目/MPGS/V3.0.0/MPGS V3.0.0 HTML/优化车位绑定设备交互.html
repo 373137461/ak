@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>优化车位绑定设备交互</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/优化车位绑定设备交互/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/优化车位绑定设备交互/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u436" class="ax_default box_1">
+        <div id="u436_div" class=""></div>
+        <div id="u436_text" class="text ">
+          <p><span>车位-业务说明：</span></p><p><span>1、内容制作中原左侧车位和设备面板合并为车位设备类：仅保留车位、蓝牙（原PVD控制器）和屏三个元素，默认不再显示其他元素；</span></p><p><span>2、车位及设备元素的生成均改为点击选中元素-在画布上单击即生成元素（车位上方显示车位编号），同时自动展开右侧的属性面板。之后新增车位编号在上一个车位的编号尾号递增+1；</span></p><p><span>3、点击绑定设备，显示可绑定的设备下拉框，设备下拉框包括视频探测器、红外探测器、地磁探测器、超声波探测器、19款PVD，默认选中视频探测器：</span></p><p><span>（1）视频探测器：默认显示“MAC地址”和“识别区号”两个输入框</span></p><p><span>（2）地磁探测器、红外探测器、19款PVD：默认显示“MAC地址”输入框。</span></p><p><span>（3）超声波探测器：默认显示“管理器+探测器序号”输入框，点击+默认在上一个元素编号基础上递增+1，点击-默认在上一个元素编号基础上递减-1；默认末两位为探测器序号，两位以前默认为管理器序号。</span></p><p><span>4、一个车位支持绑定多个不同设备，但相同设备只允许绑定一个，如车位001已绑定视频探测器，再点击绑定设备，那么设备下拉框仅有地磁探测器、红外探测器、19款PVD、超声波探测器4个选项。</span></p><p><span>5、车位上方显示车位编号，下方显示绑定的设备编号。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u437" class="ax_default box_1">
+        <div id="u437_div" class=""></div>
+        <div id="u437_text" class="text ">
+          <p><span>屏-业务说明：</span></p><p><span>1、点击选中屏元素-在画布上单击生成屏元素，默认显示右侧属性面板；</span></p><p><span>2、隐藏原来的“元素编号”字段，其他内容和交互均不变。</span></p><p><span>3、每次添加屏元素的组地址与上一个屏元素一致，屏地址为上一个屏地址的尾号递增+1</span></p><p><span>4、屏元素下方显示组地址+屏地址，如组地址25，屏地址51，则显示2551。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u438" class="ax_default box_1">
+        <div id="u438_div" class=""></div>
+        <div id="u438_text" class="text ">
+          <p><span>蓝牙-业务说明：</span></p><p><span>1、将原来的PVD控制器名称改为蓝牙；原来的“元素编号”字段改为“蓝牙ID”，蓝牙设备ID改为“微信ID”；微信ID、UUID、major、minor输入框默认隐藏。</span></p><p><span>2、每次添加蓝牙元素的蓝牙ID为上一个蓝牙元素编号的尾号递增+1</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u439" class="ax_default box_1">
+        <div id="u439_div" class=""></div>
+        <div id="u439_text" class="text ">
+          <p><span style="font-family:'黑体';font-weight:400;">区域-业务说明：</span></p><p><span style="font-family:'黑体';font-weight:400;">1、新增区域，点击选中区域工具，去掉区域生成弹窗，在画布上点击画框后即可生成区域；区域默认引导区域，颜色默认红色#FF0000</span></p><p><span style="font-family:'黑体';font-weight:400;">2、点击绑定进场检测设备/离场绑定设备，显示可绑定的设备下拉框，进离场可绑定设备下拉框包括是视频探测器、19款PVD和区域枪，</span></p><p><span style="font-family:'黑体';font-weight:400;">（1）视频探测器：默认显示“MAC地址”和“识别区号”两个输入框；</span></p><p><span style="font-family:'黑体';font-weight:400;">（2）19款PVD：默认显示“MAC地址”输入框；</span></p><p><span style="font-family:'黑体';font-weight:400;">（3）区域枪：默认显示“IP地址”输入框和设备型号下拉框，下拉框下拉框包括HIK_CG225和HX_CV100，默认HIK_CG225；</span></p><p><span style="font-family:'黑体';font-weight:400;">3、点击绑定其他检测设备，显示可绑定的设备，包括视频探测器、19款PVD和红外管理器；</span></p><p><span style="font-family:'黑体';font-weight:400;">（1）视频探测器：默认显示“控制板/蓝牙ID”输入框</span></p><p><span style="font-family:'黑体';font-weight:400;">（2）19款PVD：默认显示“MAC地址”输入框</span></p><p><span style="font-family:'黑体';font-weight:400;">（3）红外管理器：默认显示“管理器+探测器序号”输入框</span></p><p><span style="font-family:'黑体';font-weight:400;">4、一个区域支持绑定多个不同设备，但相同设备只允许绑定一个，如区域01进场检测设备已绑定视频探测器，再点击绑定设备，那么设备下拉框仅有19款PVD和区域枪两个选项。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u440" class="ax_default image">
+        <img id="u440_img" class="img " src="images/优化车位绑定设备交互/u440.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u441" class="ax_default label">
+        <div id="u441_div" class=""></div>
+        <div id="u441_text" class="text ">
+          <p><span>车位编号</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u442" class="ax_default label">
+        <div id="u442_div" class=""></div>
+        <div id="u442_text" class="text ">
+          <p><span>设备编号</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u443" class="ax_default image">
+        <img id="u443_img" class="img " src="images/优化车位绑定设备交互/u443.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u444" class="ax_default label">
+        <div id="u444_div" class=""></div>
+        <div id="u444_text" class="text ">
+          <p><span>1、点击车位为选中模式，在画布上单击即可生成车位元素（类似路径点的生成模式）</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u445" class="ax_default label">
+        <div id="u445_div" class=""></div>
+        <div id="u445_text" class="text ">
+          <p><span>2、并默认展开右侧属性面板</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u446" class="ax_default image">
+        <img id="u446_img" class="img " src="images/优化车位绑定设备交互/u446.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u447" class="ax_default label">
+        <div id="u447_div" class=""></div>
+        <div id="u447_text" class="text ">
+          <p><span>3、点击绑定设备展示设备下拉框，输入设备信息即可为车位绑定设备</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u448" class="ax_default image">
+        <img id="u448_img" class="img " src="images/优化车位绑定设备交互/u448.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u449" class="ax_default image">
+        <img id="u449_img" class="img " src="images/优化车位绑定设备交互/u449.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u450" class="ax_default image">
+        <img id="u450_img" class="img " src="images/优化车位绑定设备交互/u450.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u451" class="ax_default image">
+        <img id="u451_img" class="img " src="images/优化车位绑定设备交互/u451.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u452" class="ax_default image">
+        <img id="u452_img" class="img " src="images/优化车位绑定设备交互/u452.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u453" class="ax_default image">
+        <img id="u453_img" class="img " src="images/优化车位绑定设备交互/u453.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u454" class="ax_default image">
+        <img id="u454_img" class="img " src="images/优化车位绑定设备交互/u454.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u455" class="ax_default image">
+        <img id="u455_img" class="img " src="images/优化车位绑定设备交互/u455.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u456" class="ax_default image">
+        <img id="u456_img" class="img " src="images/优化车位绑定设备交互/u456.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u457" class="ax_default image">
+        <img id="u457_img" class="img " src="images/优化车位绑定设备交互/u457.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u458" class="ax_default box_1">
+        <div id="u458_div" class=""></div>
+        <div id="u458_text" class="text ">
+          <p><span>室外控灯逻辑优化说明：</span></p><p><span>（1）原立体区域改为室外区域；</span></p><p><span>（2）原须为室外区域绑定区域灯，以该区域灯作为寻找区域的终点，改为不限制必须绑定区域灯，原寻灯逻辑改为寻找室外区域的中心点。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u459" class="ax_default image">
+        <img id="u459_img" class="img " src="images/优化车位绑定设备交互/u459.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u460" class="ax_default image">
+        <img id="u460_img" class="img " src="images/优化车位绑定设备交互/u460.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u461" class="ax_default image">
+        <img id="u461_img" class="img " src="images/优化车位绑定设备交互/u461.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u462" class="ax_default image">
+        <img id="u462_img" class="img " src="images/优化车位绑定设备交互/u462.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u463" class="ax_default image">
+        <img id="u463_img" class="img " src="images/优化车位绑定设备交互/u463.png"/>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+1、安装软件后重启电脑。
+
+2、确保电脑具备接入internet的宽带连接，并已连上。
+
+3、将安装程序目录内的sptcc.pcf文件复制到安装目录下。（默认安装目录为：C:\Program Files\Cisco Systems\VPN Client\Profiles）
+
+4、点击桌面VPN 快捷方式图标启动程序，双击名为“sptcc”进行连接，在弹出的对话框中输入用户名（daolutingche）和密码(daolutingche)。
+
+5、VPN连接成功后，程序会自动最小化，此时屏幕右下侧任务栏内的锁状图标会从“开锁”变化为“闭锁”（标志连接成功）。
+
+
+注意事项：
+
+1、必须确保电脑处于internet联网状态。
+
+2、在WINDOWS 7系统下，如启动VPN程序异常，请进行如下尝试：
+（1）找到VPN程序的安装目录（默认为：C:\Program Files\Cisco Systems\VPN Client）；
+（2）找到名为“vpngui.exe”的可执行文件，右键-属性-兼容性，勾选“以兼容模式运行这个程序（Windows XP service pack 3）”，以及“以管理员身份运行此程序”
+
+3、如有其它问题，请与交通卡公司工作人员联系。
+

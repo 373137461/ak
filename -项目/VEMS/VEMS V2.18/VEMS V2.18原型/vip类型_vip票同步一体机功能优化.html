@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>VIP类型/VIP票同步一体机功能优化</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/vip类型_vip票同步一体机功能优化/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/vip类型_vip票同步一体机功能优化/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (图片) -->
+      <div id="u128" class="ax_default image">
+        <img id="u128_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u128.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u129" class="ax_default box_2">
+        <div id="u129_div" class=""></div>
+        <div id="u129_text" class="text ">
+          <p style="font-size:15px;"><span>业务说明：</span></p><p style="font-size:15px;"><span>1、对VIP类型/VIP票进行批量同步时，原管理端发送至一体机的模式改为用户触发批量同步时，管理端向一体机发出同步指令，由一体机向管理端拉取VIP类型/VIP票</span></p><p style="font-size:15px;"><span>2、因批量同步会将一体机内的所有VIP类型/VIP票删除后再进行同步操作，进出高峰期时将影响现场使用，故需作风险提示。</span></p><p style="font-size:14px;"><span><br></span></p><p style="font-size:14px;"><span>1.数据同步机制优化</span></p><p style="font-size:14px;"><span>2.点击“同步”的时候增加风险提示</span></p><p style="font-size:14px;"><span>3.VIP票/VIP车辆 名称优化</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u130" class="ax_default _三级标题">
+        <div id="u130_div" class=""></div>
+        <div id="u130_text" class="text ">
+          <p><span>点击同步的时候增加 “</span><span style="color:#FF0000;">风险提示语”</span></p><p><span style="color:#FF0000;"><br></span></p><p><span style="color:#FF0000;">&nbsp;&nbsp; </span><span style="color:#000000;">车主管理/VIP类型模块“ 全部同步到主控板 ”增加 风险提示语</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u131" class="ax_default image">
+        <img id="u131_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u131.png"/>
+      </div>
+
+      <!-- Unnamed (垂直线) -->
+      <div id="u132" class="compound ax_default arrow" WidgetHeight="125" WidgetWidth="3" CompoundMode="true">
+        <img id="u132_img" class="singleImg img " src="images/vip类型_vip票同步一体机功能优化/u132.png"/>
+        <div id="u132p000" class="ax_vector_shape" WidgetTopLeftX="-0.476923076923077" WidgetTopLeftY="0.166666666666667" WidgetTopRightX="-0.476923076923077" WidgetTopRightY="-0.333333333333333" WidgetBottomLeftX="0.484615384615385" WidgetBottomLeftY="0.166666666666667" WidgetBottomRightX="0.484615384615385" WidgetBottomRightY="-0.333333333333333">
+          <img id="u132p000_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u132p000.png"/>
+        </div>
+        <div id="u132p001" class="ax_vector_shape" WidgetTopLeftX="-0.5" WidgetTopLeftY="0" WidgetTopRightX="0.25" WidgetTopRightY="0" WidgetBottomLeftX="-0.5" WidgetBottomLeftY="20.8333333333333" WidgetBottomRightX="0.25" WidgetBottomRightY="20.8333333333333">
+          <img id="u132p001_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u132p001.png"/>
+        </div>
+        <div id="u132p002" class="ax_vector_shape" WidgetTopLeftX="4.21428571428571" WidgetTopLeftY="-0.0769230769230769" WidgetTopRightX="4.21428571428571" WidgetTopRightY="0.0384615384615385" WidgetBottomLeftX="-0.25" WidgetBottomLeftY="-0.0769230769230769" WidgetBottomRightX="-0.25" WidgetBottomRightY="0.0384615384615385">
+          <img id="u132p002_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u132p002.png"/>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u133" class="ax_default box_3">
+        <div id="u133_div" class=""></div>
+        <div id="u133_text" class="text ">
+          <p><span>确认</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u134" class="ax_default box_1">
+        <div id="u134_div" class=""></div>
+        <div id="u134_text" class="text ">
+          <p><span><br></span></p><p><span><br></span></p><p><span>确认全部重新同步到全部主控板吗？</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u135" class="ax_default image">
+        <img id="u135_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u135.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u136" class="ax_default image">
+        <img id="u136_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u136.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u137" class="ax_default box_1">
+        <div id="u137_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u138" class="ax_default _三级标题">
+        <div id="u138_div" class=""></div>
+        <div id="u138_text" class="text ">
+          <p><span>&nbsp;&nbsp;&nbsp; 车主管理/VIP开通续费模块“ 同步VIP”增加 风险提示语</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u139" class="ax_default image">
+        <img id="u139_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u139.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u140" class="ax_default image">
+        <img id="u140_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u140.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u141" class="ax_default _三级标题">
+        <div id="u141_div" class=""></div>
+        <div id="u141_text" class="text ">
+          <p><span>3.VIP票/VIP车辆 名称优化</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u142" class="ax_default _三级标题">
+        <div id="u142_div" class=""></div>
+        <div id="u142_text" class="text ">
+          <p><span>VIP车辆 修改为&nbsp; </span><span style="color:#FF0000;">管理端VIP</span><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; VIP票 修改为 </span><span style="color:#FF0000;">本地VIP</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u143" class="ax_default box_1">
+        <div id="u143_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u144" class="ax_default box_1">
+        <div id="u144_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u145" class="ax_default _三级标题">
+        <div id="u145_div" class=""></div>
+        <div id="u145_text" class="text ">
+          <p><span>管理端VIP</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (垂直线) -->
+      <div id="u146" class="compound ax_default arrow" WidgetHeight="99" WidgetWidth="2" CompoundMode="true">
+        <img id="u146_img" class="singleImg img " src="images/vip类型_vip票同步一体机功能优化/u146.png"/>
+        <div id="u146p000" class="ax_vector_shape" WidgetTopLeftX="-0.462264150943396" WidgetTopLeftY="0.166666666666667" WidgetTopRightX="-0.462264150943396" WidgetTopRightY="-0.166666666666667" WidgetBottomLeftX="0.471698113207547" WidgetBottomLeftY="0.166666666666667" WidgetBottomRightX="0.471698113207547" WidgetBottomRightY="-0.166666666666667">
+          <img id="u146p000_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u146p000.png"/>
+        </div>
+        <div id="u146p001" class="ax_vector_shape" WidgetTopLeftX="-0.5" WidgetTopLeftY="0" WidgetTopRightX="0" WidgetTopRightY="0" WidgetBottomLeftX="-0.5" WidgetBottomLeftY="24.75" WidgetBottomRightX="0" WidgetBottomRightY="24.75">
+          <img id="u146p001_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u146p001.png"/>
+        </div>
+        <div id="u146p002" class="ax_vector_shape" WidgetTopLeftX="3.61538461538462" WidgetTopLeftY="-0.0416666666666667" WidgetTopRightX="3.61538461538462" WidgetTopRightY="0.0416666666666667" WidgetBottomLeftX="-0.192307692307692" WidgetBottomLeftY="-0.0416666666666667" WidgetBottomRightX="-0.192307692307692" WidgetBottomRightY="0.0416666666666667">
+          <img id="u146p002_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u146p002.png"/>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u147" class="ax_default _三级标题">
+        <div id="u147_div" class=""></div>
+        <div id="u147_text" class="text ">
+          <p><span>本地VIP</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (垂直线) -->
+      <div id="u148" class="compound ax_default arrow" WidgetHeight="222" WidgetWidth="2" CompoundMode="true">
+        <img id="u148_img" class="singleImg img " src="images/vip类型_vip票同步一体机功能优化/u148.png"/>
+        <div id="u148p000" class="ax_vector_shape" WidgetTopLeftX="-0.491150442477876" WidgetTopLeftY="0.25" WidgetTopRightX="-0.491150442477876" WidgetTopRightY="-0.25" WidgetBottomLeftX="0.491150442477876" WidgetBottomLeftY="0.25" WidgetBottomRightX="0.491150442477876" WidgetBottomRightY="-0.25">
+          <img id="u148p000_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u148p000.png"/>
+        </div>
+        <div id="u148p001" class="ax_vector_shape" WidgetTopLeftX="-0.5" WidgetTopLeftY="-0.25" WidgetTopRightX="0" WidgetTopRightY="-0.25" WidgetBottomLeftX="-0.5" WidgetBottomLeftY="55.25" WidgetBottomRightX="0" WidgetBottomRightY="55.25">
+          <img id="u148p001_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u148p001.png"/>
+        </div>
+        <div id="u148p002" class="ax_vector_shape" WidgetTopLeftX="8.34615384615385" WidgetTopLeftY="-0.0416666666666667" WidgetTopRightX="8.34615384615385" WidgetTopRightY="0.0416666666666667" WidgetBottomLeftX="-0.192307692307692" WidgetBottomLeftY="-0.0416666666666667" WidgetBottomRightX="-0.192307692307692" WidgetBottomRightY="0.0416666666666667">
+          <img id="u148p002_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u146p002.png"/>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u149" class="ax_default line">
+        <img id="u149_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u149.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u150" class="ax_default label">
+        <div id="u150_div" class=""></div>
+        <div id="u150_text" class="text ">
+          <p><span>同步过程中可能会影响系统运行，请勿在高峰期操作。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u151" class="ax_default image">
+        <img id="u151_img" class="img " src="images/质保授权提示/u8.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u152" class="ax_default image">
+        <img id="u152_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u152.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u153" class="ax_default image">
+        <img id="u153_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u153.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u154" class="ax_default image">
+        <img id="u154_img" class="img " src="images/vip类型_vip票同步一体机功能优化/u154.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u155" class="ax_default box_1">
+        <div id="u155_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u156" class="ax_default image">
+        <img id="u156_img" class="img " src="images/质保授权提示/u8.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u157" class="ax_default label">
+        <div id="u157_div" class=""></div>
+        <div id="u157_text" class="text ">
+          <p><span>同步过程中可能会影响系统运行，请勿在高峰期操作。</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

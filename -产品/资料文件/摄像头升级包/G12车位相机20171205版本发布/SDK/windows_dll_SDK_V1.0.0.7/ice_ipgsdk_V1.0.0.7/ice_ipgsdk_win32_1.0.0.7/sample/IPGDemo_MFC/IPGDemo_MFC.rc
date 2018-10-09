@@ -1,0 +1,591 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\IPGDemo_MFC.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\IPGDemo_MFC.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG  0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 IPGDemo_MFC"
+FONT 9, "宋体"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "IPGDemo_MFC 1.0 版",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2017",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_IPGDEMO_MFC_DIALOG DIALOGEX 0, 0, 750, 490
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "IPGSDKDemo"
+MENU IDR_MENU_OPTION
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    CONTROL         "IPAddress1",IDC_IPADDRESS_CAMERA,"SysIPAddress32",WS_TABSTOP,570,15,100,15
+    DEFPUSHBUTTON   "登录",IDC_BUTTON_OPEN,675,15,50,14
+    PUSHBUTTON      "退出",IDC_BUTTON_CLOSE,575,140,50,14
+    CONTROL         "",IDC_STATIC_VIDEO1,"Static",SS_BLACKFRAME,15,15,263,145
+    CONTROL         "",IDC_STATIC_VIDEO2,"Static",SS_BLACKFRAME,290,15,263,145
+    CONTROL         "",IDC_STATIC_VIDEO3,"Static",SS_BLACKFRAME,15,170,263,145
+    CONTROL         "",IDC_STATIC_VIDEO4,"Static",SS_BLACKFRAME,290,170,263,145
+    CONTROL         "List1",IDC_LIST_ALRAM,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,15,325,540,155
+    PUSHBUTTON      "系统参数",IDC_BUTTON_SYSTEM,575,160,50,14
+    PUSHBUTTON      "外设参数",IDC_BUTTON_PORT,575,180,50,14
+    PUSHBUTTON      "算法参数",IDC_BUTTON_ALGO,575,200,50,14
+    PUSHBUTTON      "单个车位状态",IDC_BUTTON_STATUS,630,140,60,14
+    COMBOBOX        IDC_COMBO_POSITION,695,140,40,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "所有车位状态",IDC_BUTTON_ALL,630,160,60,14
+    PUSHBUTTON      "232串口发送",IDC_BUTTON_TRANS_RS232,630,200,60,14
+    GROUPBOX        "操作",IDC_STATIC,565,130,180,90
+    LISTBOX         IDC_LIST_INFO,565,235,180,245,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_CAMERA,570,35,155,80,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "485串口发送",IDC_BUTTON_TRANS_RS485,630,180,60,14
+    PUSHBUTTON      "强制控灯",IDC_BUTTON_LIGHTCTL,695,160,42,14
+    PUSHBUTTON      "获取时间",IDC_BUTTON_DEVTIME,695,179,42,14
+    PUSHBUTTON      "时间同步",IDC_BUTTON_SYNCTIME,696,199,41,14
+END
+
+IDD_DIALOG_LOCAL DIALOG  0, 0, 400, 140
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "本地参数"
+FONT 9, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,230,80,50,14
+    PUSHBUTTON      "取消",IDCANCEL,290,80,50,14
+    LTEXT           "抓拍保存路径：",IDC_STATIC,30,43,57,8
+    EDITTEXT        IDC_EDIT_PATH,100,40,180,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSE,290,40,50,14
+END
+
+IDD_DIALOG_SYSTEM DIALOGEX 0, 0, 502, 321
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "系统参数"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,139,283,50,14
+    PUSHBUTTON      "取消",IDCANCEL,299,283,50,14
+    GROUPBOX        "车位参数",IDC_STATIC,10,10,240,80
+    COMBOBOX        IDC_COMBO_POSITION,100,30,40,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "车位编号：",IDC_STATIC,50,32,41,8
+    CONTROL         "禁用",IDC_RADIO_ENABLE0,"Button",BS_AUTORADIOBUTTON | WS_GROUP,100,50,32,10
+    CONTROL         "使能",IDC_RADIO_ENABLE1,"Button",BS_AUTORADIOBUTTON,140,50,32,10
+    LTEXT           "使能车位：",IDC_STATIC,50,51,41,8
+    LTEXT           "车位类型：",IDC_STATIC,50,66,41,8
+    CONTROL         "临时",IDC_RADIO_TYPE0,"Button",BS_AUTORADIOBUTTON | WS_GROUP,100,65,32,10
+    CONTROL         "预定",IDC_RADIO_TYPE1,"Button",BS_AUTORADIOBUTTON,140,65,32,10
+    CONTROL         "固定",IDC_RADIO_TYPE2,"Button",BS_AUTORADIOBUTTON,180,65,32,10
+    GROUPBOX        "控灯参数",IDC_STATIC,10,100,240,160
+    LTEXT           "远程控灯参数：",IDC_STATIC,35,120,57,8
+    CONTROL         "受控于远程相机",IDC_CHECK_REMOTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,45,205,72,10
+    CONTROL         "IPAddress1",IDC_IPADDRESS_REMOTE,"SysIPAddress32",WS_TABSTOP,130,220,100,15
+    LTEXT           "远程控制其他相机IP：",IDC_STATIC,45,153,81,8
+    LTEXT           "受控灯参数：",IDC_STATIC,35,190,49,8
+    CONTROL         "远程控制其他相机",IDC_CHECK_CONTROL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,45,135,80,10
+    CONTROL         "IPAddress1",IDC_IPADDRESS_CONTROL,"SysIPAddress32",WS_TABSTOP,130,150,100,15
+    LTEXT           "受控于远程相机IP：",IDC_STATIC,45,223,73,8
+    GROUPBOX        "http推送参数",IDC_STATIC,259,11,229,112
+    CONTROL         "启动http推送",IDC_CHECK_HTTP_ENABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,265,27,64,10
+    LTEXT           "http推送地址：",IDC_STATIC,277,43,57,8
+    EDITTEXT        IDC_EDIT_HTTP_ADDR,334,39,146,14,ES_AUTOHSCROLL
+    CONTROL         "小图片",IDC_CHECK_SMALLPIC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,277,62,40,10
+    CONTROL         "大图片",IDC_CHECK_BIGPIC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,337,62,40,10
+    CONTROL         "启动定时上传",IDC_CHECK_UPLOAD_ENABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,277,81,64,10
+    CONTROL         "启动心跳功能",IDC_CHECK_HEARTBEAT_ENABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,277,100,64,10
+    LTEXT           "定时上传时间（分钟）：",IDC_STATIC,345,82,89,8
+    LTEXT           "心跳上传时间（分钟）：",IDC_STATIC,345,100,89,8
+    EDITTEXT        IDC_EDIT_UPLOAD_INTERVAL,436,78,40,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDIT_HEARTBEAT_INTERVAL,435,97,40,14,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_DIALOG_PORT DIALOG  0, 0, 600, 250
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "外设参数"
+FONT 9, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,475,210,50,14
+    PUSHBUTTON      "取消",IDCANCEL,530,210,50,14
+    CONTROL         "串口使能",IDC_CHECK_ENABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,60,60,48,10
+    LTEXT           "波特率：",IDC_STATIC,80,82,33,9
+    COMBOBOX        IDC_COMBO_BAUDRATE,150,80,80,120,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "数据位：",IDC_STATIC,80,97,33,9
+    COMBOBOX        IDC_COMBO_DATABITS,150,95,80,120,CBS_DROPDOWNLIST | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "校验位：",IDC_STATIC,80,112,33,9
+    COMBOBOX        IDC_COMBO_PARITY,150,110,80,120,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "停止位：",IDC_STATIC,80,127,33,9
+    COMBOBOX        IDC_COMBO_STOPBITS,150,125,80,120,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "流控模式：",IDC_STATIC,80,142,41,9
+    COMBOBOX        IDC_COMBO_FLOWCTRL,150,140,80,120,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "RS485",IDC_STATIC,20,30,270,170
+    CONTROL         "串口使能",IDC_CHECK_ENABLE2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,350,60,48,10
+    LTEXT           "波特率：",IDC_STATIC,370,82,33,9
+    COMBOBOX        IDC_COMBO_BAUDRATE2,440,80,80,120,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "数据位：",IDC_STATIC,370,97,33,9
+    COMBOBOX        IDC_COMBO_DATABITS2,440,95,80,120,CBS_DROPDOWNLIST | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "校验位：",IDC_STATIC,370,112,33,9
+    COMBOBOX        IDC_COMBO_PARITY2,440,110,80,120,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "停止位：",IDC_STATIC,370,127,33,9
+    COMBOBOX        IDC_COMBO_STOPBITS2,440,125,80,120,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "流控模式：",IDC_STATIC,370,142,41,9
+    COMBOBOX        IDC_COMBO_FLOWCTRL2,440,140,80,120,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "RS232",IDC_STATIC,310,30,270,170
+END
+
+IDD_DIALOG_ALGO DIALOG  0, 0, 260, 210
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "算法参数"
+FONT 9, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,95,170,50,14
+    PUSHBUTTON      "取消",IDCANCEL,150,170,50,14
+    CONTROL         "自定义识别区域",IDC_CHECK_CUSTOM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,40,20,72,10
+    COMBOBOX        IDC_COMBO_POSITION,120,60,100,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "车位编号：",IDC_STATIC,60,62,41,8
+    COMBOBOX        IDC_COMBO_RES,120,40,100,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "设置分辨率：",IDC_STATIC,60,42,49,8
+    EDITTEXT        IDC_EDIT_LEFT,120,80,100,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDIT_TOP,120,100,100,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDIT_RIGHT,120,120,100,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDIT_BOTTOM,120,140,100,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "左X坐标：",IDC_STATIC,60,83,37,8
+    LTEXT           "上Y坐标：",IDC_STATIC,60,103,37,8
+    LTEXT           "右X坐标：",IDC_STATIC,60,123,37,8
+    LTEXT           "下Y坐标：",IDC_STATIC,60,143,37,8
+END
+
+IDD_DIALOG_TRANS DIALOG  0, 0, 240, 180
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "透传数据"
+FONT 9, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "发送",IDOK,125,160,50,14
+    PUSHBUTTON      "取消",IDCANCEL,180,160,50,14
+    EDITTEXT        IDC_EDIT_DATA,10,10,220,140,ES_MULTILINE | ES_UPPERCASE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
+END
+
+IDD_DIALOG_DEV_DIALOG DIALOGEX 0, 0, 670, 376
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "设备搜索"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST_DEVLIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,38,656,331
+    PUSHBUTTON      "搜索",IDC_BUTTON_SEARCH,7,16,50,14
+    PUSHBUTTON      "修改IP",IDC_BUTTON_MODIP,71,16,50,14
+END
+
+IDD_DIALOG_IP DIALOGEX 0, 0, 276, 194
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,61,143,50,14
+    PUSHBUTTON      "取消",IDCANCEL,170,142,50,14
+    LTEXT           "IP地址：",IDC_STATIC,65,47,32,8
+    LTEXT           "子网掩码：",IDC_STATIC,56,70,41,8
+    LTEXT           "默认网关：",IDC_STATIC,56,98,41,8
+    EDITTEXT        IDC_EDIT_IP,101,43,99,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_GATEWAY,101,92,99,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_MASK,102,68,99,14,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_LIGHTCTL DIALOGEX 0, 0, 228, 146
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,29,101,50,14
+    PUSHBUTTON      "取消",IDCANCEL,131,101,50,14
+    LTEXT           "亮灯方式：",IDC_STATIC,31,30,41,8
+    LTEXT           "灯光颜色：",IDC_STATIC,31,58,41,8
+    COMBOBOX        IDC_COMBO_STYLE,80,28,67,58,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_COLOR,80,55,67,60,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404B0"
+        BEGIN
+            VALUE "FileDescription", "IPGDemo_MFC Microsoft 基础类应用程序"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "IPGDemo_MFC"
+            VALUE "LegalCopyright", "版权所有 (C) 2017"
+            VALUE "OriginalFilename", "IPGDemo_MFC.EXE"
+            VALUE "ProductName", "IPGDemo_MFC 应用程序"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_IPGDEMO_MFC_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 744
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 483
+    END
+
+    IDD_DIALOG_LOCAL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 393
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 133
+    END
+
+    IDD_DIALOG_SYSTEM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 495
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 314
+    END
+
+    IDD_DIALOG_PORT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 593
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 243
+    END
+
+    IDD_DIALOG_ALGO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 253
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+
+    IDD_DIALOG_TRANS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 233
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 173
+    END
+
+    IDD_DIALOG_DEV_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 663
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 369
+    END
+
+    IDD_DIALOG_IP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 269
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 187
+    END
+
+    IDD_DIALOG_LIGHTCTL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 221
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_OPTION MENU 
+BEGIN
+    POPUP "选项"
+    BEGIN
+        MENUITEM "设置",                          IDC_BUTTON_CONFIG
+        MENUITEM "设备搜索",                        32772
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DIALOG_PORT DLGINIT
+BEGIN
+    IDC_COMBO_BAUDRATE, 0x403, 5, 0
+0x3231, 0x3030, "\000" 
+    IDC_COMBO_BAUDRATE, 0x403, 5, 0
+0x3432, 0x3030, "\000" 
+    IDC_COMBO_BAUDRATE, 0x403, 5, 0
+0x3834, 0x3030, "\000" 
+    IDC_COMBO_BAUDRATE, 0x403, 5, 0
+0x3639, 0x3030, "\000" 
+    IDC_COMBO_BAUDRATE, 0x403, 6, 0
+0x3931, 0x3032, 0x0030, 
+    IDC_COMBO_BAUDRATE, 0x403, 6, 0
+0x3833, 0x3034, 0x0030, 
+    IDC_COMBO_BAUDRATE, 0x403, 7, 0
+0x3131, 0x3235, 0x3030, "\000" 
+    IDC_COMBO_DATABITS, 0x403, 2, 0
+0x0035, 
+    IDC_COMBO_DATABITS, 0x403, 2, 0
+0x0036, 
+    IDC_COMBO_DATABITS, 0x403, 2, 0
+0x0037, 
+    IDC_COMBO_DATABITS, 0x403, 2, 0
+0x0038, 
+    IDC_COMBO_PARITY, 0x403, 3, 0
+0xdece, "\000" 
+    IDC_COMBO_PARITY, 0x403, 7, 0
+0xe6c6, 0xa3d0, 0xe9d1, "\000" 
+    IDC_COMBO_PARITY, 0x403, 7, 0
+0xbcc5, 0xa3d0, 0xe9d1, "\000" 
+    IDC_COMBO_PARITY, 0x403, 5, 0
+0xeab1, 0xc7bc, "\000" 
+    IDC_COMBO_PARITY, 0x403, 5, 0
+0xd5bf, 0xf1b8, "\000" 
+    IDC_COMBO_STOPBITS, 0x403, 2, 0
+0x0031, 
+    IDC_COMBO_STOPBITS, 0x403, 2, 0
+0x0032, 
+    IDC_COMBO_FLOWCTRL, 0x403, 3, 0
+0xdece, "\000" 
+    IDC_COMBO_FLOWCTRL, 0x403, 5, 0
+0xb2d3, 0xfebc, "\000" 
+    IDC_COMBO_FLOWCTRL, 0x403, 4, 0
+0x6f58, 0x006e, 
+    IDC_COMBO_FLOWCTRL, 0x403, 5, 0
+0x6f58, 0x6666, "\000" 
+    IDC_COMBO_BAUDRATE2, 0x403, 5, 0
+0x3231, 0x3030, "\000" 
+    IDC_COMBO_BAUDRATE2, 0x403, 5, 0
+0x3432, 0x3030, "\000" 
+    IDC_COMBO_BAUDRATE2, 0x403, 5, 0
+0x3834, 0x3030, "\000" 
+    IDC_COMBO_BAUDRATE2, 0x403, 5, 0
+0x3639, 0x3030, "\000" 
+    IDC_COMBO_BAUDRATE2, 0x403, 6, 0
+0x3931, 0x3032, 0x0030, 
+    IDC_COMBO_BAUDRATE2, 0x403, 6, 0
+0x3833, 0x3034, 0x0030, 
+    IDC_COMBO_BAUDRATE2, 0x403, 7, 0
+0x3131, 0x3235, 0x3030, "\000" 
+    IDC_COMBO_DATABITS2, 0x403, 2, 0
+0x0035, 
+    IDC_COMBO_DATABITS2, 0x403, 2, 0
+0x0036, 
+    IDC_COMBO_DATABITS2, 0x403, 2, 0
+0x0037, 
+    IDC_COMBO_DATABITS2, 0x403, 2, 0
+0x0038, 
+    IDC_COMBO_PARITY2, 0x403, 3, 0
+0xdece, "\000" 
+    IDC_COMBO_PARITY2, 0x403, 7, 0
+0xe6c6, 0xa3d0, 0xe9d1, "\000" 
+    IDC_COMBO_PARITY2, 0x403, 7, 0
+0xbcc5, 0xa3d0, 0xe9d1, "\000" 
+    IDC_COMBO_PARITY2, 0x403, 5, 0
+0xeab1, 0xc7bc, "\000" 
+    IDC_COMBO_PARITY2, 0x403, 5, 0
+0xd5bf, 0xf1b8, "\000" 
+    IDC_COMBO_STOPBITS2, 0x403, 2, 0
+0x0031, 
+    IDC_COMBO_STOPBITS2, 0x403, 2, 0
+0x0032, 
+    IDC_COMBO_FLOWCTRL2, 0x403, 3, 0
+0xdece, "\000" 
+    IDC_COMBO_FLOWCTRL2, 0x403, 5, 0
+0xb2d3, 0xfebc, "\000" 
+    IDC_COMBO_FLOWCTRL2, 0x403, 4, 0
+0x6f58, 0x006e, 
+    IDC_COMBO_FLOWCTRL2, 0x403, 5, 0
+0x6f58, 0x6666, "\000" 
+    0
+END
+
+IDD_DIALOG_ALGO DLGINIT
+BEGIN
+    IDC_COMBO_RES, 0x403, 19, 0
+0x3031, 0x3038, 0x2850, 0x3931, 0x3032, 0x7820, 0x3120, 0x3830, 0x2930, 
+"\000" 
+    IDC_COMBO_RES, 0x403, 17, 0
+0x3039, 0x5030, 0x3128, 0x3036, 0x2030, 0x2078, 0x3039, 0x2930, "\000" 
+    IDC_COMBO_RES, 0x403, 17, 0
+0x3237, 0x5030, 0x3128, 0x3832, 0x2030, 0x2078, 0x3237, 0x2930, "\000" 
+    IDC_COMBO_RES, 0x403, 16, 0
+0x3435, 0x5030, 0x3928, 0x3036, 0x7820, 0x3520, 0x3034, 0x0029, 
+    IDC_COMBO_RES, 0x403, 14, 0
+0x3144, 0x3728, 0x3430, 0x7820, 0x3320, 0x3639, 0x0029, 
+    0
+END
+
+IDD_DIALOG_LIGHTCTL DLGINIT
+BEGIN
+    IDC_COMBO_STYLE, 0x403, 12, 0
+0xd8b9, 0xd5b1, 0x4453, 0xbf4b, 0xb5d8, 0x00c6, 
+    IDC_COMBO_STYLE, 0x403, 3, 0
+0xf0c3, "\000" 
+    IDC_COMBO_STYLE, 0x403, 3, 0
+0xc1c1, "\000" 
+    IDC_COMBO_STYLE, 0x403, 5, 0
+0xc1c9, 0xb8cb, "\000" 
+    IDC_COMBO_COLOR, 0x403, 5, 0
+0xecba, 0xabc9, "\000" 
+    IDC_COMBO_COLOR, 0x403, 5, 0
+0xccc2, 0xabc9, "\000" 
+    IDC_COMBO_COLOR, 0x403, 5, 0
+0xc6bb, 0xabc9, "\000" 
+    IDC_COMBO_COLOR, 0x403, 5, 0
+0xb6c0, 0xabc9, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 IPGDemo_MFC(&A)..."
+    IDP_SOCKETS_INIT_FAILED "Windows 通信端口初始化失败。"
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\IPGDemo_MFC.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

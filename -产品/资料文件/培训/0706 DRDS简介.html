@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>DRDS简易教程</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>DRDS简介</h1>
+<p>艾科智泊-研发部</p>
+<hr />
+<p>来源:<a href="https://help.aliyun.com/document_detail/50067.html?spm=5176.7947010.779804.ee.cf3134f4AuefN4">https://help.aliyun.com/document_detail/50067.html?spm=5176.7947010.779804.ee.cf3134f4AuefN4</a></p>
+<h2>基本原理</h2>
+<p>DRDS 按照一定策略将数据分发到后端的每个 RDS 数据库中，这些拆分到 RDS 中的数据库被称为分库，分库中的表称为分表。</p>
+<p><strong>拆分键</strong></p>
+<p>拆分键即分库/分表字段，因此分为分库键和分表键。拆分键暂时只支持单个字段。</p>
+<p>分库键：DRDS 根据分库键的值将数据水平拆分到后端的每一个 RDS 分库里。键值相同的数据，一定会位于同一个 RDS 数据库里。
+分表键：每一张逻辑表都可以定义自己的分表键，键值相同的数据，一定会位于同一个 RDS 数据表里。</p>
+<p><img src="http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/pic/29679/cn_zh/1493882998649/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8.png" /></p>
+<p><strong>SQL路由</strong></p>
+<p>当用户发起执行 SQL 语句的请求时，DRDS 会理解 SQL 语句的含义，然后按照拆分键的值和执行策略将 SQL 路由到对应分区进行执行，如下图所示：</p>
+<p><img src="http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/pic/29660/cn_zh/1493882804790/SQL%E8%B7%AF%E7%94%B11.png" /></p>
+<p><strong>数据合并</strong></p>
+<p>如果一个 SQL 语句被路由到多个分表执行，DRDS 会将各个分表返回的数据按照原始 SQL 语义进行合并，并将最终结果返回给用户。
+<img src="http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/pic/29660/cn_zh/1493882823131/SQL%E8%B7%AF%E7%94%B12.png" /></p>
+<p>插入语句时一定要带拆分键，否则报错；</p>
+<p>执行带有 WHERE 条件的 UPDATE、DELETE、SELECT，如带有拆分键则会分发到实际的物理库进行执行；否则会分发到所有分库上执行（即全表扫描），且执行结果会在 DRDS 中进行合并。全表扫描响应较慢，在高并发业务场景中应尽量避免使用。</p>
+<p>原则：WHERE条件必须带分库键，尽量带分表键</p>
+<p><strong>表的类型</strong></p>
+<p>分库分表:按照策略建表，数据按照拆分键落在具体库和表（分库不分表、分表不分库、分库分表）</p>
+<p>单库单表:普通的表，在分库0建表，数据都在分库0</p>
+<p>广播表:在所有分库建立一样的表，数据在每个分库都由一份完全一样的（避免跨库 JOIN）</p>
+<p><strong>事物</strong></p>
+<p>DRDS：柔性事物，目前我们的DRDS版本不支持</p>
+<p>mysql原生事物：需要确保事物内所有UPDATE、DELETE、INSERT都落在一个库，否则会报错</p>
+<h2>实用知识</h2>
+<p><strong>建表语句</strong></p>
+<pre><code>CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name
+    (create_definition,...)
+    [table_options]
+    [drds_partition_options]
+    [partition_options]
+
+CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name
+    [(create_definition,...)]
+    [table_options]
+    [drds_partition_options]
+    [partition_options]
+    select_statement
+
+drds_partition_options:
+    DBPARTITION BY
+        { {HASH|YYYYMM|YYYYWEEK|YYYYDD|YYYYMM_OPT|YYYYWEEK_OPT|YYYYDD_OPT}([column])}
+        [TBPARTITION BY
+            { {HASH|MM|DD|WEEK|MMDD|YYYYMM|YYYYWEEK|YYYYDD|YYYYMM_OPT|YYYYWEEK_OPT|YYYYDD_OPT}(column)}
+          [TBPARTITIONS num]
+        ]
+</code></pre>
+
+<p>例:</p>
+<pre><code>CREATE TABLE `parking_record` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT BY GROUP,
+  `TOP_BILL_CODE` varchar(30) NOT NULL COMMENT '停车场流水号',
+  `PARK_ID` varchar(50) NOT NULL COMMENT '停车场编号',
+  `CAR_CODE` varchar(30) DEFAULT NULL COMMENT '最终车牌号',
+  `CONFIDENCE` decimal(5,2) DEFAULT NULL COMMENT '最终识别置信度',
+  `ENTER_CAR_CODE` varchar(30) DEFAULT NULL COMMENT '进场时识别车牌号',
+  `ENTER_CARD_CODE` varchar(50) DEFAULT NULL COMMENT '进场卡号',
+  `ENTER_TIME` datetime DEFAULT NULL COMMENT '进场时间',
+  `ENTER_CHANNEL_NAME` varchar(100) DEFAULT NULL COMMENT '进入场通道名',
+  `ENTER_VIP_TYPE` tinyint(4) DEFAULT NULL COMMENT '进场Vip类型（0未定义，1普通，2本地VIP，3外部VIP，4黑名单，5访客）',
+  `ENTER_TYPE` tinyint(4) DEFAULT NULL COMMENT '进场类型(0未确认，1自动放行，2确认放行，3异常放行,99虚拟放行)',
+  `ENTER_CAR_CODE_COLOR` int(11) DEFAULT NULL COMMENT '进场车牌颜色',
+  `ENTER_CAR_TYPE` tinyint(4) DEFAULT NULL COMMENT '车辆类型(0未知，1小车，2大车，3超大车，4中型车)',
+  `ENTER_CUSTOM_VIP_NAME` varchar(100) DEFAULT NULL COMMENT '进场用户自定义VIP名称',
+  `LEAVE_CAR_CODE` varchar(30) DEFAULT NULL COMMENT '出场车牌号',
+  `LEAVE_CARD_CODE` varchar(50) DEFAULT NULL COMMENT '出场卡号',
+  `LEAVE_TIME` datetime DEFAULT NULL COMMENT '出场时间',
+  `LEAVE_CHANNEL_NAME` varchar(100) DEFAULT NULL COMMENT '出场通道名',
+  `LEAVE_VIP_TYPE` tinyint(4) DEFAULT NULL COMMENT '出场Vip类型（0未定义，1普通，2本地VIP，3外部VIP，4黑名单，5访客）',
+  `LEAVE_TYPE` tinyint(4) DEFAULT NULL COMMENT '出场类型（0未确认，1自动放行，2确认放行，3异常放行,99虚拟放行）参照出入场方式表',
+  `LEAVE_CAR_CODE_COLOR` int(11) DEFAULT NULL COMMENT '出场车牌颜色',
+  `LEAVE_CAR_TYPE` tinyint(4) DEFAULT NULL COMMENT '出场车辆类型(0未知，1小车，2大车，3超大车，4中型车)',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `DATA_STATUS` tinyint(4) DEFAULT NULL COMMENT '数据状态 (0异常 ，1正常)',
+  `CONFILICT_TOP_BILL_CODE` varchar(30) DEFAULT NULL COMMENT '异常数据冲突对应的TOP_BILL_CODE',
+  `EXTEND_1` varchar(50) DEFAULT NULL,
+  `EXTEND_2` varchar(50) DEFAULT NULL,
+  `EXTEND_3` varchar(50) DEFAULT NULL,
+  `EXTEND_4` varchar(100) DEFAULT NULL,
+  `EXTEND_5` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `auto_shard_key_PARK_ID` (`PARK_ID`),
+  KEY `INDEX_TOP_BILL_CODE` (`TOP_BILL_CODE`) USING BTREE,
+  KEY `INDEX_ENTER_TIME` (`ENTER_TIME`) USING BTREE,
+  KEY `INDEX_LEAVE_TIME` (`LEAVE_TIME`) USING BTREE,
+  KEY `INDEX_CAR_CODE` (`CAR_CODE`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=300000000 DEFAULT CHARSET=utf8
+ dbpartition by hash(`PARK_ID`) tbpartition by YYYYMM(`ENTER_TIME`) tbpartitions 12;
+</code></pre>
+
+<p>DRDS 拆分函数对分库分表的支持情况</p>
+<pre><code>拆分函数    描述  是否支持用于分库    是否支持用于分表
+HASH    简单取模    是   是
+UNI_HASH    简单取模    是   是
+RIGHT_SHIFT 数值向右移   是   是
+RANGE_HASH  双拆分列哈希  是   是
+MM  按月份哈希   否   是
+DD  按日期哈希   否   是
+WEEK    按周哈希    否   是
+MMDD    按月日哈希   否   是
+YYYYMM  按年月哈希   是   是
+YYYYWEEK    按年周哈希   是   是
+YYYYDD  按年日哈希   是   是
+YYYYMM_OPT  按年月哈希，改进型   是   是
+YYYYWEEK_OPT    按年周哈希，改进型   是   是
+YYYYDD_OPT  按年日哈希，改进型   是   是
+</code></pre>
+
+<p><strong>Sequence 介绍</strong></p>
+<p>DRDS 全局唯一数字序列（64 位数字，对应 MySQL 中 Signed BIGINT 类型，以下简称为 Sequence）的主要目标是为了生成全局唯一和有序递增的数字序列，常用于主键列、唯一索引列等值的生成。</p>
+<p>目前共支持 2 种 Sequence 类型：</p>
+<pre><code>类型（缩写）  全局唯一    连续  单调递增    同一连接内单调递增   非单点 数据类型    可读性
+Group Sequence（GROUP）   是   否   否   是   是   所有整型    好
+Simple Sequence（SIMPLE） 是   是   是   是   否   所有整型    好
+</code></pre>
+
+<p>注：仅拆分表和广播表指定了 AUTO_INCREMENT 后，DRDS 才会创建隐式的 Sequence。且默认使用Group Sequence</p>
+<p><strong>重点</strong>：单库单表使用底层RDS的机制生产,是连续的;分表和广播表使用Group Sequence，是非连续的</p>
+<p><strong>常用指令</strong></p>
+<p>show help : 展示 DRDS 所有辅助 SQL 指令及其说明。</p>
+<pre><code>+-----------------------------------------+---------------------------------------------------------+---------------------------------------------+
+| STATEMENT                               | DESCRIPTION                                             | EXAMPLE                                     |
++-----------------------------------------+---------------------------------------------------------+---------------------------------------------+
+| show rule                               | Report all table rule                                   |                                             |
+| show rule from TABLE                    | Report table rule                                       | show rule from user                         |
+| show full rule from TABLE               | Report table full rule                                  | show full rule from user                    |
+| show topology from TABLE                | Report table physical topology                          | show topology from user                     |
+| show partitions from TABLE              | Report table dbPartition or tbPartition columns         | show partitions from user                   |
+| show broadcasts                         | Report all broadcast tables                             |                                             |
+| show datasources                        | Report all partition db threadPool info                 |                                             |
+| show node                               | Report master/slave read status                         |                                             |
+| show slow                               | Report top 100 slow sql                                 |                                             |
+| show physical_slow                      | Report top 100 physical slow sql                        |                                             |
+| clear slow                              | Clear slow data                                         |                                             |
+| trace SQL                               | Start trace sql, use show trace to print profiling data | trace select count(*) from user; show trace |
+| show trace                              | Report sql execute profiling info                       |                                             |
+| explain SQL                             | Report sql plan info                                    | explain select count(*) from user           |
+| explain detail SQL                      | Report sql detail plan info                             | explain detail select count(*) from user    |
+| explain execute SQL                     | Report sql on physical db plan info                     | explain execute select count(*) from user   |
+| show sequences                          | Report all sequences status                             |                                             |
+| create sequence NAME [start with COUNT] | Create sequence                                         | create sequence test start with 0           |
+| alter sequence NAME [start with COUNT]  | Alter sequence                                          | alter sequence test start with 100000       |
+| drop sequence NAME                      | Drop sequence                                           | drop sequence test                          |
++-----------------------------------------+---------------------------------------------------------+---------------------------------------------+
+20 rows in set (0.00 sec)
+</code></pre>
+
+<p>查看规则:</p>
+<pre><code>show rule [FROM tablename] 
+
+show rule where DB_PARTITION_KEY !=''
+
+show full rule [FROM tablename]
+
+SHOW TOPOLOGY FROM tablename 查看指定逻辑表的拓扑分布
+</code></pre>
+
+<p>查看慢SQL：</p>
+<pre><code>SHOW [FULL] SLOW [WHERE expr] [limit expr] 查看慢SQL语句
+逻辑慢 SQL 是指应用发送到 DRDS 的慢 SQL。
+
+SHOW [FULL] PHYSICAL_SLOW [WHERE expr] [limit expr] 语句
+物理慢 SQL 是指 DRDS 发送到 RDS 的慢 SQL。
+</code></pre>
+
+<p>SHOW PROCESSLIST：</p>
+<pre><code>SHOW PROCESSLIST
+查看 DRDS 中的连接与正在执行的 SQL 等信息。
+
+SHOW PHYSICAL_PROCESSLIST
+查看底层所有 MySQL/RDS 上正在执行的 SQL 信息。
+</code></pre>
+
+<p>TRACE:</p>
+<pre><code>TRACE 语句用于查看具体 SQL 的执行情况
+注意：TRACE SQL 和 EXPLAIN SQL 的区别在于 TRACE SQL 会实际执行该语句。
+
+trace SELECT * from parking_record where car_code='粤B88888';
+show trace
+</code></pre>
+
+<p>EXPLAIN 和执行计划：</p>
+<pre><code>控制指令    说明  示例
+EXPLAIN { SQL } 查看 DRDS 层 SQL 语句的概要执行计划，包括执行的分库、物理语句和整体参数。
+EXPLAIN DETAIL { SQL }  查看 DRDS 层 SQL 语句的详细执行计划，包括执行语句类型、并发度、返回字段信息、物理表和库分组等。
+EXPLAIN EXECUTE { SQL } 查看底层 RDS/MySQL 的执行计划，等同于 MySQL 的 EXPLAIN 语句。
+
+explain SELECT * from parking_record where car_code='粤B88888';
+explain detail SELECT * from parking_record where car_code='粤B88888';
+explain execute SELECT * from parking_record where car_code='粤B88888';
+</code></pre>
+
+<h2>我们如何使用DRDS</h2>
+<p><strong>我们有哪些表是分库分表的</strong></p>
+<pre><code>5   ake_platform_push_messages  0   FIRST_PUSHED_DATE   hash    8   MESSAGE_TYPE    hash    12
+10  area_parking_record 0   PARK_ID hash    8   ENTER_TIME  yyyymm  12
+75  openplatform_sync_data  0   CREATE_TIME hash    8           1
+105 park_compaign_coupon_use_record 0   PARK_ID hash    8           1
+151 park_remain_carport 0   PARK_ID hash    8   UPDATE_TIME dd  31
+217 parking_abnormal_record 0   PARK_ID hash    8   UPDATE_TIME yyyymm  12
+218 parking_abnormal_record_camera_detail   0   PARKING_CODE    hash    8           1
+220 parking_bill    0   PARK_ID hash    8   CAR_CODE    hash    30
+221 parking_bill_arrear_record  0   PARK_ID hash    8           1
+222 parking_bill_detail 0   PARK_ID hash    8   CHECK_IN_TIME   yyyymm  12
+223 parking_bill_detail_coupon  0   PARK_ID hash    8   PARKING_BILL_DETAIL_ID  hash    30
+235 parking_record  0   PARK_ID hash    8   ENTER_TIME  yyyymm  12
+236 parking_record_camera_detail    0   TOP_BILL_CODE   hash    8           1
+237 PARKING_RECORD_DRIVER_CAMERA    0   TOP_BILL_CODE   hash    8           1
+238 parking_record_extend   0   PARK_ID hash    8   ENTER_TIME  yyyymm  12
+239 PARKING_RECORD_OTHER_EXTEND 0   PARK_ID hash    8   ENTER_TIME  yyyymm  12
+258 sbtest1 0   id  hash    8   id  hash    4
+275 tb_third_sync_data  0   create_time hash    8           1
+277 tbl_operation_parkingbill   0   PARK_ID hash    8   PayTime yyyymm  12
+316 USER_PARKING_RECORD 0   USER_ID hash    8   CAR_CODE    hash    30
+</code></pre>
+
+<p><strong>查询原则</strong></p>
+<p><strong>单表 SQL 优化有以下几个原则：</strong></p>
+<ul>
+<li>SQL 语句尽可能带有拆分键；（不带分库键必须评审）</li>
+<li>拆分键的条件尽可能是等值条件；</li>
+<li>如果拆分键的条件是 IN 条件，则 IN 后面的值的数目应尽可能少（需要远少于分片数，并且数目不会随业务的增长而增多）；</li>
+<li>如果 SQL 语句不带有拆分键，那么 DISTINCT、GROUP BY 和 ORDER BY 在同一个 SQL 语句中尽量只出现一种。</li>
+</ul>
+<p><strong>JOIN 优化</strong></p>
+<p>DRDS 的 JOIN 查询分为可下推的 JOIN 和不可下推的 JOIN（即分布式 JOIN）两类，其优化策略各不相同。
+可下推的 JOIN 主要分为以下几类：</p>
+<ul>
+<li>单表（即非拆分表）之间的 JOIN；</li>
+<li>参与 JOIN 的表在过滤条件中均带有拆分键作为条件，并且拆分算法相同（即通过拆分算法计算的数据分布在相同分片上）；</li>
+<li>参与 JOIN 的表均按照拆分键作为 JOIN 条件，并且拆分算法相同；</li>
+<li>广播表（也称为小表广播）与拆分表之间的 JOIN。</li>
+</ul>
+<p>使用 DRDS 时，应尽可能将 JOIN 查询优化成能够在分库上执行的可下</p>
+<p><strong>分布式 JOIN 优化</strong></p>
+<p>如果一个 JOIN 查询不可下推（即 JOIN 条件和过滤条件中均不带有拆分键），则需要由 DRDS 完成查询中的部分计算，即分布式 JOIN。</p>
+<p>通常将分布式 JOIN 中的表按照数据量大小分为两类：</p>
+<ul>
+<li>小表：经过条件过滤后，参与 JOIN 计算的中间结果的数据量比较少（一般少于 100 条，或者相较于其它表数据更少）的表；</li>
+<li>大表：经过条件过滤后，参与 JOIN 计算的中间结果的数据量比较大（一般多于 100 条，或者相较于其它表数据更多）的表。</li>
+</ul>
+<p>原则：对分布式 JOIN 的优化应将小表作为驱动表，且让驱动表带有尽可能多的过滤条件。</p>
+<p><strong>建表原则</strong></p>
+<ul>
+<li>
+<p>老表（大写）添加字段继续使用大写字段，新建表统一小写（表名和字段）</p>
+</li>
+<li>
+<p>数据可预见大于百万级使用分库分表，否则使用单库单表，大于5千万级的必须使用分库分表</p>
+</li>
+<li>
+<p>如需分库分表应与业务相关，按实际需求使用拆分键</p>
+</li>
+<li>
+<p>举例：</p>
+<pre><code>如跟车场相关的：以车场UUID分库、时间维度分表
+(如智泊云的area_parking_record 数据量大，以park_id分库、enter_time分表)
+
+消息重发类：1消息类型分库、创建时间分表 2创建时间分库、不分表 3按时间分库、消息IDhash分表（按重发策略）
+
+时间拆分选择 ：
+            YYYYMM  按年月哈希
+            YYYYWEEK    按年周哈希
+            YYYYDD  按年日哈希
+
+考虑两种场景 1、回调更新状态时，更新where条件应该是尽可能的包含拆分键
+            2、扫描需要重发的数据数据时,查询where条件应该尽可能的包含拆分键
+
+设备类：数据量小，单库单表就可以了
+
+停车场：很多地方需要关联，应该使用广播表（很可惜、目前使用的是单库单表）
+</code></pre>
+
+</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

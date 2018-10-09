@@ -53,6 +53,8 @@
 ._文本段落 {
   text-align:left;
 }
+.arrow {
+}
 ._流程形状 {
 }
 .image {
@@ -65,6 +67,8 @@
   color:#000000;
 }
 .box_2 {
+}
+.box_3 {
 }
 .ellipse {
 }
@@ -89,6 +93,9 @@
   text-align:left;
 }
 .radio_button {
+  text-align:left;
+}
+.tree_node {
   text-align:left;
 }
 ._连接线 {

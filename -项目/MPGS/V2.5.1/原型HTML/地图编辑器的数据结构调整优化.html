@@ -28,7 +28,7 @@
       <div id="u1" class="ax_default box_2">
         <div id="u1_div" class=""></div>
         <div id="u1_text" class="text ">
-          <p><span style="font-family:'黑体';font-weight:400;">业务说明：</span></p><p><span style="font-family:'黑体';font-weight:400;">1、地图数据分开实体数据和关系数据，调整数据结构。</span></p><p><span style="font-family:'黑体';font-weight:400;">2、地图中每个元素生成一个唯一ID，相同类型元素生成的id不能重复；后台提供一个检查设备id和车位编号的接口，前端调用检查。</span></p><p><span style="font-family:'黑体';font-weight:400;">3、用户每新增一个元素都检查一次该元素生成的设备ID是否与相同类型已有元素的设备ID重复，如果重复将提示用户“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">实体编号重复</span><span style="font-family:'黑体';font-weight:400;">”。</span></p><p><span style="font-family:'黑体';font-weight:400;">4、前端最后保存上传的时候，需检查设备ID是否唯一，检查到存在重复的设备ID将无法保存并提示“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">xx层xxx区域编号xxxx不是唯一实体，请检查！</span><span style="font-family:'黑体';font-weight:400;">”（两个同类型元素设备ID重复情况下，提示最后添加的元素编号）</span></p><p><span style="font-family:'黑体';font-weight:400;">5、前端最后保存上传的时候，需检查是否有孤立的路径点，存在孤立的路径点不可保存。当存在孤立的路径点是</span><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;color:#FF0000;">高亮该路径点</span><span style="font-family:'黑体';font-weight:400;">并提示“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">存在无关联的路径点，请检查！”</span></p><p><span style="font-family:'黑体';font-weight:400;">6、前端最后保存上传的时候，需检查有关联关系的关联实体是否存在，关联关系必须存在关联实体，关联实体被删除后需同步删除该实体的关联关系。如果检查到关联关系存在但无实体时应提示“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">找不到绑定xxx</span><span style="font-family:'黑体';font-weight:400;color:#A1A1A1;">（元素名称）</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">xxx</span><span style="font-family:'黑体';font-weight:400;color:#A1A1A1;">（元素编号）</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">的xxx</span><span style="font-family:'黑体';font-weight:400;color:#A1A1A1;">（元素名称/区域名称）</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">xxx</span><span style="font-family:'黑体';font-weight:400;color:#A1A1A1;">（元素编号）</span><span style="font-family:'黑体';font-weight:400;">”，比如引导屏PING11绑定AA区域后，删除AA区域，用户上传数据时检查到屏与1区域的关系且找不到1区域，那么无法保存且提示“找不到绑定引导屏PING11的区域AA”</span></p>
+          <p><span style="font-family:'黑体';font-weight:400;">业务说明：</span></p><p><span style="font-family:'黑体';font-weight:400;">1、地图数据分开实体数据和关系数据，调整数据结构。</span></p><p><span style="font-family:'黑体';font-weight:400;">2、地图中每个元素生成一个唯一ID，相同类型元素生成的id不能重复；后台提供一个检查设备id和车位编号的接口，前端调用检查。</span></p><p><span style="font-family:'黑体';font-weight:400;">3、用户每新增一个元素都检查一次该元素生成的ID是否与相同类型已有元素的ID重复，如果重复将提示用户“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">实体编号重复</span><span style="font-family:'黑体';font-weight:400;">”。</span></p><p><span style="font-family:'黑体';font-weight:400;">4、前端最后保存上传的时候，需检查是否有孤立的路径点，存在孤立的路径点不可保存。当存在孤立的路径点是</span><span style="font-family:'黑体 Bold', '黑体 Regular', '黑体';font-weight:700;color:#FF0000;">高亮该路径点</span><span style="font-family:'黑体';font-weight:400;">并提示“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">存在无关联的路径点，请检查！”</span></p><p><span style="font-family:'黑体';font-weight:400;">5、修改区域枪绑定检测设备的交互，由原来的输入区域枪、视频探测器和区域灯的元素编号绑定修改为点击“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">绑定设备</span><span style="font-family:'黑体';font-weight:400;">”，点击需要绑定的设备，选中的设备高亮提示，并将已绑定元素的编号显示在属性栏中，绑定完成后点击“</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">结束绑定设备</span><span style="font-family:'黑体';font-weight:400;">”即可。（类似引导屏绑定区域）</span></p><p><span style="font-family:'黑体';font-weight:400;">&nbsp; 约束条件：</span></p><p><span style="font-family:'黑体';font-weight:400;">（1）进场检测设备和离场检测设备只可选择</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">视频探测器和区域枪</span><span style="font-family:'黑体';font-weight:400;">两个元素进行绑定、其他检测设备只可选择</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">区域灯</span><span style="font-family:'黑体';font-weight:400;">元素进行绑定</span></p><p><span style="font-family:'黑体';font-weight:400;">（2）</span><span style="font-family:'黑体';font-weight:400;color:#FF0000;">已绑定的设备需高亮提示</span><span style="font-family:'黑体';font-weight:400;">。</span></p><p><span style="font-family:'黑体';font-weight:400;">6、前端最后保存上传的时候，需检查有关联关系的关联实体是否存在，关联关系必须存在关联实体，关联实体被删除后需同步删除该实体的关联关系。</span></p>
         </div>
       </div>
 
@@ -47,27 +47,79 @@
 
       <!-- Unnamed (图片) -->
       <div id="u4" class="ax_default _图片">
-        <img id="u4_img" class="img " src="images/地图编辑器的数据结构调整优化/u2.png"/>
-      </div>
-
-      <!-- Unnamed (矩形) -->
-      <div id="u5" class="ax_default box_1">
-        <div id="u5_div" class=""></div>
-        <div id="u5_text" class="text ">
-          <p><span>B1层Y区域编号158-SPGLQ3不是唯一实体，请检查！</span></p>
-        </div>
+        <img id="u4_img" class="img " src="images/地图编辑器的数据结构调整优化/u4.png"/>
       </div>
 
       <!-- Unnamed (图片) -->
-      <div id="u6" class="ax_default _图片">
-        <img id="u6_img" class="img " src="images/地图编辑器的数据结构调整优化/u2.png"/>
+      <div id="u5" class="ax_default _图片">
+        <img id="u5_img" class="img " src="images/地图编辑器的数据结构调整优化/u5.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u6" class="ax_default primary_button">
+        <div id="u6_div" class=""></div>
+        <div id="u6_text" class="text ">
+          <p><span>绑定设备</span></p>
+        </div>
       </div>
 
       <!-- Unnamed (矩形) -->
       <div id="u7" class="ax_default box_1">
         <div id="u7_div" class=""></div>
-        <div id="u7_text" class="text ">
-          <p><span>找不到绑定引导屏PING11的区域AA!</span></p>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u8" class="ax_default label">
+        <div id="u8_div" class=""></div>
+        <div id="u8_text" class="text ">
+          <p><span>进场检测设备：</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u9" class="ax_default _图片">
+        <img id="u9_img" class="img " src="images/地图编辑器的数据结构调整优化/u9.png"/>
+      </div>
+
+      <!-- Unnamed (椭圆形) -->
+      <div id="u10" class="ax_default ellipse">
+        <img id="u10_img" class="img " src="images/地图编辑器的数据结构调整优化/u10.png"/>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u11" class="ax_default icon">
+        <img id="u11_img" class="img " src="images/地图编辑器的数据结构调整优化/u11.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u12" class="ax_default label">
+        <div id="u12_div" class=""></div>
+        <div id="u12_text" class="text ">
+          <p><span>离场检测设备：当前未绑定设备</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13" class="ax_default primary_button">
+        <div id="u13_div" class=""></div>
+        <div id="u13_text" class="text ">
+          <p><span>绑定设备</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u14" class="ax_default label">
+        <div id="u14_div" class=""></div>
+        <div id="u14_text" class="text ">
+          <p><span>其他检测设备：当前未绑定设备</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u15" class="ax_default primary_button">
+        <div id="u15_div" class=""></div>
+        <div id="u15_text" class="text ">
+          <p><span>绑定设备</span></p>
         </div>
       </div>
     </div>
